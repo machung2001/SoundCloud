@@ -71,7 +71,7 @@ linked_partitioning=1
    - Open the `inspect` option in Chrome, and go to the network tab.
    - Access [SoundCloud website](https://soundcloud.com/) and look for any network transferring in this tab
    - `client_id` will be in most of these transfer `header`, look around a bit and you will find it.
-- `limit={QUERY_RESULT_LIMIT}`, an optional field, if not specified, the default result return of each query will be 1, add this parameter to the request URL if you want to limit the return results.
+- `limit={QUERY_RESULT_LIMIT}`, an optional field, if not specified, the default result return of each query will be 10, add this parameter to the request URL if you want to limit the return results.
 - `linked_partitioning=1` referring to [SoundCloud pagination](https://developers.soundcloud.com/blog/offset-pagination-deprecated) for more information. Just add it to your initial request.
 
 #### Everything
@@ -99,7 +99,7 @@ An example of a query search for the term `hello world` may be as follows:
 ```
 https://api-v2.soundcloud.com/search?q=hello%20world&client_id=xxxxx&limit=20&linked_partitioning=1
 ```
-This will return the `20` first result for `hello world` (notice that the `xxx...` are to be replaced with actual `client_id`)
+This will return the  first `20` result for `hello world` (notice that the `xxx...` are to be replaced with actual `client_id`)
 
 The response from the above request may be represented in `JSON format:
 ```JSON
