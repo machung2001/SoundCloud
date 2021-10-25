@@ -23,16 +23,16 @@
 
 
 
-##1. Foreword
+## 1. Foreword
 This document is written for Soundcloud v2 API, which has not been officially documented. This version of API is subject to change at may already be changed at the time of readings.
 
 Please do be informed that the use of V2 API is against the 'Term of use' of SoundCloud in general and should be used for research purposes only.
 
 At the time written, this API is used for an educational project. 
 
-##2. API
-###Querying
-####Everything
+## 2. API
+### Querying
+#### Everything
 
 In this section, we will get the result from a query of any type, this will appear in `Everything` tab, the query is what will be input in the SoundCloud search bar.
 
