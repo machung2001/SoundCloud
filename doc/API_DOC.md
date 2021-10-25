@@ -1,4 +1,4 @@
-# SoundCloud API (v2) Unofficial Documents
+# SoundCloud API (v2) Unofficial Documentation
 0. Documents progress
 - [x] Foreword
 - [ ] Querying
