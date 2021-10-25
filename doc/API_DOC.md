@@ -24,7 +24,7 @@
 
 
 ## 1. Foreword
-This document is written for Soundcloud v2 API, which has not been officially documented. This version of API is subject to change at may already be changed at the time of readings.
+This document is written for Soundcloud v2 API, which has not been officially documented. This version of API is subject to change and may already changed at the time of reading.
 
 Please do be informed that the use of V2 API is against the 'Term of use' of SoundCloud in general and should be used for research purposes only.
 
