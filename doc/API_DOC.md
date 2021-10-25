@@ -69,14 +69,20 @@ The response from the above request may be represented in `JSON format:
 }
 ```
 
-- `collection` is a list of results with the length of the requested `limit` parameter, in this case, the `20` item will be returned and stored in this field, we can start extracting this as data.
+- `collection` is a list of results with the length of the requested `limit` parameter, in this case, `20` item will be returned and stored in this field, we can start extracting this as data.
 
-- `total_result` is the total result of the search query
+- `total_result` is the amount of result search query has find
 - `next_href` however, is what we must care about, for this contain a link of the next `20` result (or `limit` parameter value).
 
 Parameter `next_href` will be concatenated with `client_id` to produce the next url for api request:
 ```python
 new_url = response['next_href'] + '&{client_id}'
+```
+
+In this case, this url will be:
+
+```
+https://api-v2.soundcloud.com/search?query_urn=soundcloud%3Asearch%3Afa128d89a8d44b76817c180aab6fe0f2&limit=20&offset=20&q=hello%20world&client_id=xxxxxxx...
 ```
 
 This URL will be used to get the next set of results, this process keeps looping until the field `next_href` no longer appears in the response result.
