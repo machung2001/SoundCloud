@@ -32,6 +32,25 @@ At the time written, this API is used for an educational project.
 
 ## 2. API
 ### Querying
+
+#### Parameters explaining
+
+SoundCloud API provides parameters to work with their API, these parameters will be used by combining, concatenating them into request URL, with a separator between them is the `&` symbol.
+For this project, only these parameters are needed:
+```
+q={YOUR_QUERY}  
+client_id={YOUR_CLIENT_ID}  
+limit={QUERY_RESULT_LIMIT}  (optional)
+linked_partitioning=1 
+```
+- `q={YOUR_QUERY}` is the query you want to search for, if you use `tab`, `space`, ... in the query, it must be replaced with appropriate ASCII encode. Though if you use the `requests` library in python, it will do this for you automatically.
+- `client_id={YOUR_CLIENT_ID}` contain your user id, this id is unique to each user. There are many ways to get this field, though the easiest one is through your browser:
+   - Open the `inspect` option in Chrome, and go to the network tab.
+   - Access [SoundCloud website](https://soundcloud.com/) and look for any network transferring in this tab
+   - `client_id` will be in most of these transfer `header`, look around a bit and you will find it.
+- `limit={QUERY_RESULT_LIMIT}`, an optional field, if not specified, the default result return of each query will be 1, add this parameter to the request URL if you want to limit the return results.
+- `linked_partitioning=1` referring to [SoundCloud pagination](https://developers.soundcloud.com/blog/offset-pagination-deprecated) for more information. Just add it to your initial request.
+
 #### Everything
 
 In this section, we will get the result from a query of any type, this will appear in `Everything` tab, the query is what will be input in the SoundCloud search bar.
