@@ -9,6 +9,12 @@
     - [ ] Playlist with albums
     - [ ] Playlist without albums
   - [ ] Tracks
+- [ ] Get data from ids
+  - [ ] Users
+  - [ ] Playlists
+    - [ ] Playlist with albums
+    - [ ] Playlist without albums
+  - [ ] Tracks
   
 1. Foreword
 2. API  
@@ -20,7 +26,12 @@
   - Users
   - Tracks
   - Everything
-
+- Get data from ids
+  - Users
+  - Tracks
+  - Playlists
+    - Playlist with albums
+    - Playlist without albums 
 
 
 ## 1. Foreword
