@@ -36,6 +36,12 @@ At the time written, this API is used for an educational project.
 #### Parameters explaining
 
 SoundCloud API provides parameters to work with their API, these parameters will be used by combining, concatenating them into request URL, with a separator between them is the `&` symbol.
+
+For example:
+```
+https://api-v2.soundcloud.com/...?q={YOUR_QUERY}&client_id={YOUR_CLIENT_ID}&.....
+```
+
 For this project, only these parameters are needed:
 ```
 q={YOUR_QUERY}  
