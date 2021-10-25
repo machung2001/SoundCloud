@@ -1,4 +1,6 @@
 # SoundCloud API (v2) Unofficial Documentation
+
+=================================================================
 0. Documents progress
 - [x] Foreword
 - [ ] Querying
@@ -15,7 +17,9 @@
     - [ ] Playlist with albums
     - [ ] Playlist without albums
   - [ ] Tracks
-  
+
+===================================================================
+
 1. Foreword
 2. API  
 - Querying
