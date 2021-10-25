@@ -2,7 +2,7 @@
 0. Documents progress
 - [x] Foreword
 - [ ] Querying
-  - [ ] Parameters explaining
+  - [x] Parameters explaining
   - [x] Everything
   - [x] Users
   - [ ] Playlists
