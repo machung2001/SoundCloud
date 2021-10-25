@@ -3,12 +3,12 @@
 - [x] Foreword
 - [ ] Querying
   - [ ] Parameters explaining
+  - [x] Everything
+  - [x] Users
   - [ ] Playlists
     - [ ] Playlist with albums
     - [ ] Playlist without albums
-  - [ ] Users
   - [ ] Tracks
-  - [x] Everything
   
 1. Foreword
 2. API  
@@ -86,3 +86,39 @@ https://api-v2.soundcloud.com/search?query_urn=soundcloud%3Asearch%3Afa128d89a8d
 ```
 
 This URL will be used to get the next set of results, this process keeps looping until the field `next_href` no longer appears in the response result.
+
+#### Users
+
+SoundCloud api also provide users name search
+
+We will use the following base url to query an users name search:
+```
+https://api-v2.soundcloud.com/search/users?
+```
+With these parameters:
+```
+q={YOUR_QUERY}  
+client_id={YOUR_CLIENT_ID}  
+limit={QUERY_RESULT_LIMIT}  
+linked_partitioning=1
+```
+
+With each parameter separated by `&`, we have the full api query request as follows:
+```
+https://api-v2.soundcloud.com/search/users?q={YOUR_QUERY}&client_id={YOUR_CLIENT_ID}&limit={QUERY_RESULT_LIMIT}&linked_partitioning=1
+```
+An example of a query search for the term `escatic` may be as follows:
+```
+https://api-v2.soundcloud.com/search/users?q=escatic&client_id=3jXdkVwgGnCwmB9q5e7qkzpaVm4qjQSn&linked_partitioning=1
+```
+This will return users which their profile name is `escatic`. In this example, the result is as follow:
+
+```JSON
+{
+    "collection": [...],
+    "total_results": 2,
+    "query_urn": "soundcloud:search:cc53cabca6ab4114b4033f2ec6c49c51"
+}
+```
+The field `collection` contain query result, in this case, because there're only `2` users have their profile name `escatic`, this field contain all the results, and there're no `next_href` field. Though if there're more results, this field will appear.
+
