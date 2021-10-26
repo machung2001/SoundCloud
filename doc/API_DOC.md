@@ -10,13 +10,13 @@
   - [x] Everything
   - [x] Users
   - [ ] Playlists
-    - [ ] Playlist with albums
+    - [ ] Albums
     - [ ] Playlist without albums
   - [x] Tracks
 - [ ] Get data from ids
   - [ ] Users
   - [ ] Playlists
-    - [ ] Playlist with albums
+    - [ ] Albums
     - [ ] Playlist without albums
   - [ ] Tracks
 
@@ -27,7 +27,7 @@
 - Querying
   - Parameters explaining
   - Playlists
-    - Playlist with albums
+    - Albums
     - Playlist without albums
   - Users
   - Tracks
@@ -36,7 +36,7 @@
   - Users
   - Tracks
   - Playlists
-    - Playlist with albums
+    - Albums
     - Playlist without albums 
 
 
