@@ -22,8 +22,8 @@
 
 ===================================================================
 
-1. [Foreword](#foreword)  
-2. [API](#api)
+1. [Foreword](#1-foreword)  
+2. [API](#2-api)
 - [Querying](#querying)
   - [Parameters explaining](#parameters-explaining)
   - [Everything](#everything)
