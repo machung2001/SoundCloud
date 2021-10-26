@@ -5,13 +5,13 @@
 
 0. Documents progress
 - [x] Foreword
-- [ ] Querying
+- [x] Querying
   - [x] Parameters explaining
   - [x] Everything
   - [x] Users
-  - [ ] Playlists
-    - [ ] Albums
-    - [ ] Playlist without albums
+  - [x] Playlists
+    - [x] Albums
+    - [x] Playlist without albums
   - [x] Tracks
 - [ ] Get data from ids
   - [ ] Users
@@ -26,12 +26,12 @@
 2. API  
 - Querying
   - Parameters explaining
+  - Everything
+  - Users
+  - Tracks
   - Playlists
     - Albums
     - Playlist without albums
-  - Users
-  - Tracks
-  - Everything
 - Get data from ids
   - Users
   - Tracks
@@ -56,7 +56,7 @@ SoundCloud API provides parameters to work with their API, these parameters will
 
 For example:
 ```
-https://api-v2.soundcloud.com/...?q={YOUR_QUERY}&client_id={YOUR_CLIENT_ID}&.....
+GET 'https://api-v2.soundcloud.com/...?q={YOUR_QUERY}&client_id={YOUR_CLIENT_ID}&.....'
 ```
 
 For this project, only these parameters are needed:
@@ -93,11 +93,11 @@ linked_partitioning=1
 ```
 With each parameter separated by `&`, we have the full api query request as follows:
 ```
-https://api-v2.soundcloud.com/search?q={YOUR_QUERY}&client_id={YOUR_CLIENT_ID}&limit={QUERY_RESULT_LIMIT}&linked_partitioning=1
+GET 'https://api-v2.soundcloud.com/search?q={YOUR_QUERY}&client_id={YOUR_CLIENT_ID}&limit={QUERY_RESULT_LIMIT}&linked_partitioning=1'
 ```
 An example of a query search for the term `hello world` may be as follows:
 ```
-https://api-v2.soundcloud.com/search?q=hello%20world&client_id=xxxxx&limit=20&linked_partitioning=1
+GET 'https://api-v2.soundcloud.com/search?q=hello%20world&client_id=xxxxx&limit=20&linked_partitioning=1'
 ```
 This will return the  first `20` result for `hello world` (notice that the `xxx...` are to be replaced with actual `client_id`)
 
@@ -147,11 +147,11 @@ linked_partitioning=1
 
 With each parameter separated by `&`, we have the full api query request as follows:
 ```
-https://api-v2.soundcloud.com/search/users?q={YOUR_QUERY}&client_id={YOUR_CLIENT_ID}&limit={QUERY_RESULT_LIMIT}&linked_partitioning=1
+GET 'https://api-v2.soundcloud.com/search/users?q={YOUR_QUERY}&client_id={YOUR_CLIENT_ID}&limit={QUERY_RESULT_LIMIT}&linked_partitioning=1'
 ```
 An example of a query search for the term `escatic` may be as follows:
 ```
-https://api-v2.soundcloud.com/search/users?q=escatic&client_id=3jXdkVwgGnCwmB9q5e7qkzpaVm4qjQSn&linked_partitioning=1
+GET 'https://api-v2.soundcloud.com/search/users?q=escatic&client_id=3jXdkVwgGnCwmB9q5e7qkzpaVm4qjQSn&linked_partitioning=1'
 ```
 This will return users which their profile name is `escatic`. In this example, the result is as follow:
 
@@ -165,7 +165,7 @@ This will return users which their profile name is `escatic`. In this example, t
 The field `collection` contain query result, in this case, because there're only `2` users have their profile name `escatic`, this field contain all the results, and there're no `next_href` field. Though if there're more results, this field will appear.
 
 
-#### Parameters explaining
+#### Tracks
 
 Similarly, we can query for tracks.
 
@@ -184,7 +184,56 @@ linked_partitioning=1
 So the full request URL will be:
 
 ```
-https://api-v2.soundcloud.com/search/tracks?q={YOUR_QUERY}&client_id={YOUR_CLIENT_ID}&limit={QUERY_RESULT_LIMIT}&linked_partitioning=1
+GET 'https://api-v2.soundcloud.com/search/tracks?q={YOUR_QUERY}&client_id={YOUR_CLIENT_ID}&limit={QUERY_RESULT_LIMIT}&linked_partitioning=1'
 ```
 
 The return results are similar to the above query searches.
+
+#### Playlists
+There're 2 types of playlists in SoundCloud: `Albums` and `Playlist without ALbums`.
+You can toggle between these 2 types of search in [SoundCloud](https://soundcloud.com/) search result filter when using their website.
+
+##### Albums
+
+These return information about albums fit the search query. These results return when you switch to the `Albums` filter on the website.
+
+Base URL:
+```
+https://api-v2.soundcloud.com/search/albums?
+```
+
+Parameters:
+```
+q={YOUR_QUERY}  
+client_id={YOUR_CLIENT_ID}  
+limit={QUERY_RESULT_LIMIT}  (optional)
+linked_partitioning=1 
+```
+To query for an album, you can use the following request URL. 
+
+```
+GET 'https://api-v2.soundcloud.com/search/albums?q={YOUR_QUERY}&client_id={YOUR_CLIENT_ID}&limit={QUERY_RESULT_LIMIT}&linked_partitioning=1'
+```
+
+##### Playlist without albums
+
+Playlists are not categorized as albums. These return when you switch to the `Playlists` filter on the website.
+
+Base URL:
+```
+https://api-v2.soundcloud.com/search/playlists_without_albums?
+```
+
+Parameters:
+```
+q={YOUR_QUERY}  
+client_id={YOUR_CLIENT_ID}  
+limit={QUERY_RESULT_LIMIT}  (optional)
+linked_partitioning=1 
+```
+
+Full URL:
+```
+GET 'https://api-v2.soundcloud.com/search/playlists_without_albums?q={YOUR_QUERY}&client_id={YOUR_CLIENT_ID}&limit={QUERY_RESULT_LIMIT}&linked_partitioning=1'
+```
+
