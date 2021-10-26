@@ -12,7 +12,7 @@
   - [ ] Playlists
     - [ ] Playlist with albums
     - [ ] Playlist without albums
-  - [ ] Tracks
+  - [x] Tracks
 - [ ] Get data from ids
   - [ ] Users
   - [ ] Playlists
@@ -164,3 +164,27 @@ This will return users which their profile name is `escatic`. In this example, t
 ```
 The field `collection` contain query result, in this case, because there're only `2` users have their profile name `escatic`, this field contain all the results, and there're no `next_href` field. Though if there're more results, this field will appear.
 
+
+#### Parameters explaining
+
+Similarly, we can query for tracks.
+
+Base URL:
+```
+https://api-v2.soundcloud.com/search/tracks?
+```
+With the following parameters:
+```
+q={YOUR_QUERY}  
+client_id={YOUR_CLIENT_ID}  
+limit={QUERY_RESULT_LIMIT}  (optional)
+linked_partitioning=1 
+```
+
+So the full request URL will be:
+
+```
+https://api-v2.soundcloud.com/search/tracks?q={YOUR_QUERY}&client_id={YOUR_CLIENT_ID}&limit={QUERY_RESULT_LIMIT}&linked_partitioning=1
+```
+
+The return results are similar to the above query searches.
