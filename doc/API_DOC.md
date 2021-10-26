@@ -22,16 +22,16 @@
 
 ===================================================================
 
-1. Foreword
-2. API  
-- Querying
-  - Parameters explaining
-  - Everything
-  - Users
-  - Tracks
-  - Playlists
-    - Albums
-    - Playlist without albums
+1. [Foreword](#foreword)  
+2. [API](#api)
+- [Querying](#querying)
+  - [Parameters explaining](#parameters-explaining)
+  - [Everything](#everything)
+  - [Users](#users)
+  - [Tracks](#tracks)
+  - [Playlists](#playlists)
+    - [Albums](#albums)
+    - [Playlist without albums](#playlist-without-albums)
 - Get data from ids
   - Users
   - Tracks
