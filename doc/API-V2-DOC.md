@@ -24,7 +24,7 @@
   - [ ] Charts (top 50)
   - [ ] Featured (Mainpage)
 
-(notes: comments, likeds, reposted from each tracks/playlist)
+(notes: comments, likes, reposts from each track/playlist)
 
 ===================================================================
 
