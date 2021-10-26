@@ -20,8 +20,11 @@
     - [ ] Playlist without albums
   - [ ] Tracks
 - [ ] Generals
-  - [ ] Discover
-  - [ ] Charts
+  - [ ] Discover (Home tab)
+  - [ ] Charts (top 50)
+  - [ ] Featured (Mainpage)
+
+(notes: comments, likeds, reposted from each tracks/playlist)
 
 ===================================================================
 
@@ -44,6 +47,7 @@
 - Generals
   - Discover
   - Charts
+  - Featured
 
 
 ## 1. Foreword
