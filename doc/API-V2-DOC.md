@@ -88,7 +88,7 @@ For the purpose of this project, api parameter only include a few options, those
 ```
 q={YOUR_QUERY}  
 client_id={YOUR_CLIENT_ID}  
-limit={QUERY_RESULT_LIMIT}  
+limit={QUERY_RESULT_LIMIT} (optional) 
 linked_partitioning=1
 ```
 With each parameter separated by `&`, we have the full api query request as follows:
@@ -141,7 +141,7 @@ With these parameters:
 ```
 q={YOUR_QUERY}  
 client_id={YOUR_CLIENT_ID}  
-limit={QUERY_RESULT_LIMIT}  
+limit={QUERY_RESULT_LIMIT} (optional)
 linked_partitioning=1
 ```
 
