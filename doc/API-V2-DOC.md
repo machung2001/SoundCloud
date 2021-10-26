@@ -19,6 +19,9 @@
     - [ ] Albums
     - [ ] Playlist without albums
   - [ ] Tracks
+- [ ] Generals
+  - [ ] Discover
+  - [ ] Charts
 
 ===================================================================
 
@@ -38,6 +41,9 @@
   - Playlists
     - Albums
     - Playlist without albums 
+- Generals
+  - Discover
+  - Charts
 
 
 ## 1. Foreword
