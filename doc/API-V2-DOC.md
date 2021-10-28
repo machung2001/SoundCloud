@@ -40,11 +40,11 @@
     - [ ] Likers
     - [ ] Playlist without albums
 	
-- [ ] Generals
+- [x] Generals
   - [x] [Discover](https://soundcloud.com/discover)
   - [x] [Charts](https://soundcloud.com/charts)
   - [x] [Featured](https://soundcloud.com/)
-  - [ ] Currently playing
+- [ ] Currently playing (?)
  
 (notes: comments, likes, reposts from each track/playlist)
 
