@@ -15,6 +15,19 @@
   - [x] Tracks
 - [ ] Get data from ids
   - [ ] Users
+    - [ ] Tracks
+    - [ ] Featured profile
+    - [ ] Spotlight
+    - [ ] Web-profile
+    - [ ] Likes
+    - [ ] Related artist
+    - [ ] Following
+    - [ ] Comments
+    - [ ] Stream
+    - [ ] Top tracks
+    - [ ] Albums
+    - [ ] Playlist without albums
+    - [ ] Reposts
   - [ ] Playlists
     - [ ] Albums
     - [ ] Playlist without albums
@@ -23,7 +36,8 @@
   - [ ] [Discover](https://soundcloud.com/discover)
   - [ ] [Charts](https://soundcloud.com/charts)
   - [ ] [Featured](https://soundcloud.com/)
-
+  - [ ] Currently playing
+  
 (notes: comments, likes, reposts from each track/playlist)
 
 ===================================================================
@@ -73,7 +87,8 @@ For this project, only these parameters are needed:
 q={YOUR_QUERY}  
 client_id={YOUR_CLIENT_ID}  
 limit={QUERY_RESULT_LIMIT}  (optional)
-linked_partitioning=1 
+linked_partitioning=1
+ids={IDS}
 ```
 - `q={YOUR_QUERY}` is the query you want to search for, if you use `tab`, `space`, ... in the query, it must be replaced with appropriate ASCII encode. Though if you use the `requests` library in python, it will do this for you automatically.
 - `client_id={YOUR_CLIENT_ID}` contain your user id, this id is unique to each user. There are many ways to get this field, though the easiest one is through your browser:
@@ -82,6 +97,13 @@ linked_partitioning=1
    - `client_id` will be in most of these transfer `header`, look around a bit and you will find it.
 - `limit={QUERY_RESULT_LIMIT}`, an optional field, if not specified, the default result return of each query will be 10, add this parameter to the request URL if you want to limit the return results.
 - `linked_partitioning=1` referring to [SoundCloud pagination](https://developers.soundcloud.com/blog/offset-pagination-deprecated) for more information. Just add it to your initial request.
+- `ids` is different from a track/user/album 's id. It indicate the currently playing song (more on that below).
+
+A track/user/album's id is used with a `/` in an api request url when accessing a specific track/user/album. For example:
+```
+https://api-v2.soundcloud.com/tracks/230155983/....
+```
+With `23015...` is a track's id.
 
 ### Querying
 
