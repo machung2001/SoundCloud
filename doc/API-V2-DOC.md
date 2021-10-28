@@ -43,7 +43,7 @@
 - [ ] Generals
   - [ ] [Discover](https://soundcloud.com/discover)
   - [ ] [Charts](https://soundcloud.com/charts)
-  - [ ] [Featured](https://soundcloud.com/)
+  - [x] [Featured](https://soundcloud.com/)
   - [ ] Currently playing
   
 (notes: comments, likes, reposts from each track/playlist)
@@ -60,6 +60,8 @@
   - [Playlists](#playlists)
     - [Albums](#albums)
     - [Playlist without albums](#playlist-without-albums)
+- [Generals](#generals)
+  - [Featured](#featured)
 
 ## 1. Foreword
 This document is written for Soundcloud v2 API, which has not been officially documented. This version of API is subject to change and may already changed at the time of reading.
