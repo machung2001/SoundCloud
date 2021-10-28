@@ -328,7 +328,7 @@ Each item in `collection` corresponds to a list on this page.
 
 [SoundCloud charts](https://soundcloud.com/charts/) 's data. 
 ```
-'https://api-v2.soundcloud.com/charts?kind={KIND_OPTION}&genre={GENRE_OPTION}&client_id={CLIENT_ID}&linked_partitioning=1'
+GET 'https://api-v2.soundcloud.com/charts?kind={KIND_OPTION}&genre={GENRE_OPTION}&client_id={CLIENT_ID}&linked_partitioning=1'
 ```
 Example return:
 ```JSON
@@ -341,3 +341,4 @@ Example return:
     "next_href": "https://api-v2.soundcloud.com/charts?genre=soundcloud%3Agenres%3Aall-audio&query_urn=soundcloud%3Acharts%3Aa615850a7fd94ee285154f71d73add9f&offset=20&kind=top&limit=20"
 }
 ```
+We can follow `next_href` to get the next set of results
