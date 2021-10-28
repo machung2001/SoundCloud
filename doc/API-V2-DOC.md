@@ -81,7 +81,6 @@ GET 'https://api-v2.soundcloud.com/...?q={YOUR_QUERY}&client_id={YOUR_CLIENT_ID}
 
 For this project, only these parameters are needed:
 
-#### For query
 
 ```
 q={YOUR_QUERY}  
