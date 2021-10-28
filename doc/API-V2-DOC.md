@@ -32,13 +32,13 @@
     - [ ] Albums
     - [ ] Playlist without albums
   - [ ] Tracks
-    - [ ] comments
-    - [ ] related (tracks)
-    - [ ] web profile
-    - [ ] albums
-    - [ ] reposters
-    - [ ] likers
-    - [ ] playlist without albums
+    - [ ] Comments
+    - [ ] Related (tracks)
+    - [ ] Web profile
+    - [ ] Albums
+    - [ ] Reposters
+    - [ ] Likers
+    - [ ] Playlist without albums
 	
 - [ ] Generals
   - [ ] [Discover](https://soundcloud.com/discover)
