@@ -267,3 +267,21 @@ Full URL:
 GET 'https://api-v2.soundcloud.com/search/playlists_without_albums?q={YOUR_QUERY}&client_id={YOUR_CLIENT_ID}&limit={QUERY_RESULT_LIMIT}&linked_partitioning=1'
 ```
 
+### Generals
+
+#### Featured
+
+When accessing [SoundCloud](https://soundcloud.com/), there's usually a list of tracks below the search bar. To get the tracks in this list, you can use:
+```
+GET 'https://api-v2.soundcloud.com/featured_tracks/top/all-music?linked_partitioning=1&client_id={CLIENT_ID}&limit=20'
+```
+This will return a JSON containing a `collection` list that holds all the tracks. There will also be a `next_href` to navigate:
+```JSON
+{
+    'collection': [], 
+    'kind': 'top', 
+    'genre': 'all-music', 
+    'next_href': 'https://api-v2.soundcloud.com/featured_tracks/top/all-music?offset=80&limit=20', 'query_urn': None
+}
+```
+Though be careful because the list of `collection` will empty in 2 or 3 requests, the `href_next` field is still present, this is probably a bug from SoundCloud, so a check to validate return contents in `collection is needed.
