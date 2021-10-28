@@ -41,7 +41,7 @@
     - [ ] Playlist without albums
 	
 - [ ] Generals
-  - [ ] [Discover](https://soundcloud.com/discover)
+  - [x] [Discover](https://soundcloud.com/discover)
   - [ ] [Charts](https://soundcloud.com/charts)
   - [x] [Featured](https://soundcloud.com/)
   - [ ] Currently playing
@@ -61,6 +61,7 @@
     - [Albums](#albums)
     - [Playlist without albums](#playlist-without-albums)
 - [Generals](#generals)
+  - [Discover](#discover)
   - [Featured](#featured)
 
 ## 1. Foreword
@@ -269,8 +270,6 @@ Full URL:
 GET 'https://api-v2.soundcloud.com/search/playlists_without_albums?q={YOUR_QUERY}&client_id={YOUR_CLIENT_ID}&limit={QUERY_RESULT_LIMIT}&linked_partitioning=1'
 ```
 
-### Generals
-
 #### Featured
 
 When accessing [SoundCloud](https://soundcloud.com/), there's usually a list of tracks below the search bar. To get the tracks in this list, you can use:
@@ -288,3 +287,22 @@ This will return a JSON containing a `collection` list that holds all the tracks
 }
 ```
 Though be careful because the list of `collection` will empty in 2 or 3 requests, the `href_next` field is still present, this is probably a bug from SoundCloud, so a check to validate return contents in `collection is needed.
+
+### Generals
+
+#### Discover
+SoundCloud `Home` tab, or [Discover page](https://soundcloud.com/discover) contain many list of `Tracks` and `Playlists` 
+To get data of these lists, we can use the following request URL:
+```
+GET 'https://api-v2.soundcloud.com/mixed-selections?client_id={CLIENT_ID}&limit=10&linked_partitioning=1'
+```
+
+JSON return:
+```JSON
+{
+    "collection": [],
+    "next_href": null,
+    "query_urn": "soundcloud:selections:29f12c009d6546f8951d180d6943775c"
+}
+```
+Each item in `collection` corresponds to a list on this page.
