@@ -58,7 +58,6 @@ Please do be informed that the use of V2 API is against the 'Term of use' of Sou
 At the time written, this API is used for an educational project. 
 
 ## 2. API
-### Querying
 
 #### Parameters explaining
 
@@ -83,6 +82,8 @@ linked_partitioning=1
    - `client_id` will be in most of these transfer `header`, look around a bit and you will find it.
 - `limit={QUERY_RESULT_LIMIT}`, an optional field, if not specified, the default result return of each query will be 10, add this parameter to the request URL if you want to limit the return results.
 - `linked_partitioning=1` referring to [SoundCloud pagination](https://developers.soundcloud.com/blog/offset-pagination-deprecated) for more information. Just add it to your initial request.
+
+### Querying
 
 #### Everything
 
