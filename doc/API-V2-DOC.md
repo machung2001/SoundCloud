@@ -20,9 +20,9 @@
     - [ ] Playlist without albums
   - [ ] Tracks
 - [ ] Generals
-  - [ ] Discover (Home tab)
-  - [ ] Charts (top 50)
-  - [ ] Featured (Mainpage)
+  - [ ] [Discover](https://soundcloud.com/discover)
+  - [ ] [Charts](https://soundcloud.com/charts)
+  - [ ] [Featured](https://soundcloud.com/)
 
 (notes: comments, likes, reposts from each track/playlist)
 
