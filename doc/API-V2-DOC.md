@@ -60,17 +60,6 @@
   - [Playlists](#playlists)
     - [Albums](#albums)
     - [Playlist without albums](#playlist-without-albums)
-- Get data from ids
-  - Users
-  - Tracks
-  - Playlists
-    - Albums
-    - Playlist without albums 
-- Generals
-  - Discover
-  - Charts
-  - Featured
-
 
 ## 1. Foreword
 This document is written for Soundcloud v2 API, which has not been officially documented. This version of API is subject to change and may already changed at the time of reading.
