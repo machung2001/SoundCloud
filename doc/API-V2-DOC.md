@@ -104,6 +104,24 @@ limit={QUERY_RESULT_LIMIT}  (optional)
 linked_partitioning=1
 ```
 - `linked_partitioning=1` referring to [SoundCloud pagination](https://developers.soundcloud.com/blog/offset-pagination-deprecated) for more information. Just add it to your initial request.
+```
+kind={KIND_OPTION}
+```
+- Use in `charts`, there're 2 available value to this field:
+```
+KIND_OPTION = [trending, top]
+```
+```
+genre={GENRE_OPTION}
+```
+- Use in `charts`, there're x available value to this field:
+```
+GENRE_OPTION = [
+	soundcloud:genres:all-music,
+	soundcloud:genres:all-audio,
+	.... lam bieng qua
+]
+```
 
 ### Querying
 
