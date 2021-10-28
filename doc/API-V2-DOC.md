@@ -45,7 +45,7 @@
   - [x] [Charts](https://soundcloud.com/charts)
   - [x] [Featured](https://soundcloud.com/)
   - [ ] Currently playing
-  
+ 
 (notes: comments, likes, reposts from each track/playlist)
 
 ===================================================================
@@ -63,7 +63,7 @@
 - [Generals](#generals)
   - [Discover](#discover)
   - [Featured](#featured)
-
+  - [Charts](#charts)
 ## 1. Foreword
 This document is written for Soundcloud v2 API, which has not been officially documented. This version of API is subject to change and may already changed at the time of reading.
 
