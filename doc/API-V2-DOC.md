@@ -323,3 +323,21 @@ JSON return:
 }
 ```
 Each item in `collection` corresponds to a list on this page.
+
+#### Charts
+
+[SoundCloud charts](https://soundcloud.com/charts/) 's data. 
+```
+'https://api-v2.soundcloud.com/charts?kind={KIND_OPTION}&genre={GENRE_OPTION}&client_id={CLIENT_ID}&linked_partitioning=1'
+```
+Example return:
+```JSON
+{
+    "genre": "soundcloud:genres:all-audio",
+    "kind": "top",
+    "last_updated": "2021-10-28T10:08:01Z",
+    "collection": [],
+    "query_urn": "soundcloud:charts:a615850a7fd94ee285154f71d73add9f",
+    "next_href": "https://api-v2.soundcloud.com/charts?genre=soundcloud%3Agenres%3Aall-audio&query_urn=soundcloud%3Acharts%3Aa615850a7fd94ee285154f71d73add9f&offset=20&kind=top&limit=20"
+}
+```
