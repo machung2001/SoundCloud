@@ -33,12 +33,12 @@
     - [ ] Playlist without albums
   - [ ] Tracks
     - [ ] comments
-	  - [ ] related (tracks)
-	  - [ ] web profile
-	  - [ ] albums
-	  - [ ] reposters
-	  - [ ] likers
-	  - [ ] playlist without albums
+    - [ ] related (tracks)
+    - [ ] web profile
+    - [ ] albums
+    - [ ] reposters
+    - [ ] likers
+    - [ ] playlist without albums
 	
 - [ ] Generals
   - [ ] [Discover](https://soundcloud.com/discover)
