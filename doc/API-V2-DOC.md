@@ -42,7 +42,7 @@
 	
 - [ ] Generals
   - [x] [Discover](https://soundcloud.com/discover)
-  - [ ] [Charts](https://soundcloud.com/charts)
+  - [x] [Charts](https://soundcloud.com/charts)
   - [x] [Featured](https://soundcloud.com/)
   - [ ] Currently playing
   
