@@ -29,12 +29,12 @@
     - [ ] Playlist without albums
     - [ ] Reposts
   - [ ] Playlists
-    - [ ] Albums
-    - [ ] Playlist without albums
+    - [ ] Base
+    - [ ] Likers
+    - [ ] Reposters
   - [ ] Tracks
     - [ ] Comments
     - [ ] Related (tracks)
-    - [ ] Web profile
     - [ ] Albums
     - [ ] Reposters
     - [ ] Likers
