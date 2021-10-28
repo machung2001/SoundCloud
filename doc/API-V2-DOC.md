@@ -269,6 +269,7 @@ Full URL:
 ```
 GET 'https://api-v2.soundcloud.com/search/playlists_without_albums?q={YOUR_QUERY}&client_id={YOUR_CLIENT_ID}&limit={QUERY_RESULT_LIMIT}&linked_partitioning=1'
 ```
+### Generals
 
 #### Featured
 
@@ -287,8 +288,6 @@ This will return a JSON containing a `collection` list that holds all the tracks
 }
 ```
 Though be careful because the list of `collection` will empty in 2 or 3 requests, the `href_next` field is still present, this is probably a bug from SoundCloud, so a check to validate return contents in `collection is needed.
-
-### Generals
 
 #### Discover
 SoundCloud `Home` tab, or [Discover page](https://soundcloud.com/discover) contain many list of `Tracks` and `Playlists` 
