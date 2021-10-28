@@ -70,10 +70,9 @@ At the time written, this API is used for an educational project.
 
 ## 2. API
 
-#### Parameters explaining
+### Parameters explaining
 
-##### For query
-SoundCloud API provides parameters to work with their API, these parameters will be used by combining, concatenating them into request URL, with a separator between them is the `&` symbol.
+SoundCloud API provides parameters to work with their API, these parameters will be used by combining, concatenating them into request URL, with a separator between them is the `&` symbol, except for ids, which use `/` or `ids=xxx` in specific cases.
 
 For example:
 ```
@@ -81,6 +80,9 @@ GET 'https://api-v2.soundcloud.com/...?q={YOUR_QUERY}&client_id={YOUR_CLIENT_ID}
 ```
 
 For this project, only these parameters are needed:
+
+#### For query
+
 ```
 q={YOUR_QUERY}  
 client_id={YOUR_CLIENT_ID}  
