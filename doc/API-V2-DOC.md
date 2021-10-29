@@ -28,10 +28,10 @@
     - [x] Playlist without albums
     - [x] Reposts
     - [x] Followers
-  - [ ] Playlists
-    - [ ] Generals
-    - [ ] Likers
-    - [ ] Reposters
+  - [x] Playlists
+    - [x] Playlist generals
+    - [x] Playlist likers
+    - [x] Playlist Reposters
   - [ ] Tracks
     - [ ] Comments
     - [ ] Related (tracks)
@@ -77,6 +77,11 @@
     - [Likes](#likes)
     - [Following](#following)
     - [Followers](#followers)
+- [Playlists](#playlists)
+    - [Playlist's generals](#playlists-generals)
+    - [Playlist reposters](#playlist-reposters)
+    - [Playlist likers](#playlist-likers)
+    
 ## 1. Foreword
 This document is written for Soundcloud v2 API, which has not been officially documented. This version of API is subject to change and may already changed at the time of reading.
 
@@ -363,6 +368,24 @@ https://api-v2.soundcloud.com/users/{USER_ID}/followings?client_id={CLIENT_ID}&l
 ##### Followers
 ```
 https://api-v2.soundcloud.com/users/{USER_ID}/followers?client_id={CLIENT_ID}&limit=12&linked_partitioning=1
+```
+
+#### Playlists
+This section requires a playlist/album's id for each specific playlist. There seems to be no difference between playlist and albums except for a single boolean field `isAlbums` return from [Playlist generals](#playlists-generals).
+Both playlists and albums ids can be used here.
+
+##### Playlist's generals
+To get general information about a playlist:
+```
+https://api-v2.soundcloud.com/playlists/{PLAYLIST_ID}?client_id={CLIENT_ID}&limit=9&linked_partitioning=1
+```
+##### Playlist reposters
+```
+https://api-v2.soundcloud.com/playlists/{PLAYLIST_ID}/reposters?client_id={CLIENT_ID}&limit=9&linked_partitioning=1
+```
+### Playlist likers
+```
+https://api-v2.soundcloud.com/playlists/{PLAYLIST_ID}}/likers?client_id={CLIENT_ID}&limit=9&linked_partitioning=1
 ```
 
 ### Generals
