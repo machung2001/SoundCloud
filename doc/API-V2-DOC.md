@@ -342,7 +342,7 @@ https://api-v2.soundcloud.com/users/{USER_ID}/albums?client_id={CLIENT_ID}&limit
 ```
 ##### User's Playlist without albums
 ```
-https://api-v2.soundcloud.com/users/{USER_ID}/playlists_without_albums?client_id={CLIENT_ID}&limit=10&offset=0&linked_partitioning=1
+https://api-v2.soundcloud.com/users/{USER_ID}/playlists_without_albums?client_id={CLIENT_ID}&limit=10&linked_partitioning=1
 ```
 ##### Related Artist
 ```
