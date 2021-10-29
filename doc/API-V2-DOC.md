@@ -46,8 +46,6 @@
   - [x] [Featured](https://soundcloud.com/)
 - [ ] Currently playing (?)
  
-(notes: comments, likes, reposts from each track/playlist)
-
 ===================================================================
 
 1. [Foreword](#1-foreword)  
