@@ -8,11 +8,11 @@
 - [x] Querying
   - [x] Parameters explaining
   - [x] Everything
-  - [x] Users
-  - [x] Playlists
-    - [x] Albums
-    - [x] Playlist without albums
-  - [x] Tracks
+  - [x] Users query
+  - [x] Playlists query
+    - [x] Albums query
+    - [x] Playlist without albums query
+  - [x] Tracks query
 - [ ] Get data from ids
   - [x] Users
     - [x] User's Generals 
@@ -53,11 +53,11 @@
 - [Parameters explaining](#parameters-explaining)
 - [Querying](#querying)
   - [Everything](#everything)
-  - [Users](#users)
-  - [Tracks](#tracks)
-  - [Playlists](#playlists)
-    - [Albums](#albums)
-    - [Playlist without albums](#playlist-without-albums)
+  - [Users query](#users-query)
+  - [Tracks query](#tracks-query)
+  - [Playlists query](#playlists-query)
+    - [Albums query](#albums-query)
+    - [Playlist without albums query](#playlist-without-albums-query)
 - [Generals](#generals)
   - [Discover](#discover)
   - [Featured](#featured)
@@ -193,7 +193,7 @@ https://api-v2.soundcloud.com/search?query_urn=soundcloud%3Asearch%3Afa128d89a8d
 
 This URL will be used to get the next set of results, this process keeps looping until the field `next_href` no longer appears in the response result.
 
-#### Users
+#### Users Query
 
 SoundCloud api also provide users name search
 
@@ -229,7 +229,7 @@ This will return users which their profile name is `escatic`. In this example, t
 The field `collection` contain query result, in this case, because there're only `2` users have their profile name `escatic`, this field contain all the results, and there're no `next_href` field. Though if there're more results, this field will appear.
 
 
-#### Tracks
+#### Tracks query
 
 Similarly, we can query for tracks.
 
@@ -253,11 +253,11 @@ GET 'https://api-v2.soundcloud.com/search/tracks?q={YOUR_QUERY}&client_id={YOUR_
 
 The return results are similar to the above query searches.
 
-#### Playlists
+#### Playlists query
 There're 2 types of playlists in SoundCloud: `Albums` and `Playlist without ALbums`.
 You can toggle between these 2 types of search in [SoundCloud](https://soundcloud.com/) search result filter when using their website.
 
-##### Albums
+##### Albums query
 
 These return information about albums fit the search query. These results return when you switch to the `Albums` filter on the website.
 
@@ -279,7 +279,7 @@ To query for an album, you can use the following request URL.
 GET 'https://api-v2.soundcloud.com/search/albums?q={YOUR_QUERY}&client_id={YOUR_CLIENT_ID}&limit={QUERY_RESULT_LIMIT}&linked_partitioning=1'
 ```
 
-##### Playlist without albums
+##### Playlist without albums query
 
 Playlists are not categorized as albums. These return when you switch to the `Playlists` filter on the website.
 
