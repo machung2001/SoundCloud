@@ -13,7 +13,7 @@
     - [x] Albums query
     - [x] Playlist without albums query
   - [x] Tracks query
-- [ ] Get data from ids
+- [x] Get data from ids
   - [x] Users
     - [x] User's Generals 
     - [x] Tracks
@@ -32,14 +32,14 @@
     - [x] Playlist generals
     - [x] Playlist likers
     - [x] Playlist Reposters
-  - [ ] Tracks
-    - [ ] Track's generals 
-    - [ ] Track's comments
-    - [ ] Related tracks
-    - [ ] In albums
-    - [ ] Reposters
-    - [ ] Likers
-    - [ ] In playlist
+  - [x] Tracks
+    - [x] Track's generals 
+    - [x] Track's comments
+    - [x] Related tracks
+    - [x] In albums
+    - [x] Reposters
+    - [x] Likers
+    - [x] In playlist
 	
 - [x] Generals
   - [x] [Discover](https://soundcloud.com/discover)
@@ -60,10 +60,6 @@
   - [Playlists query](#playlists-query)
     - [Albums query](#albums-query)
     - [Playlist without albums query](#playlist-without-albums-query)
-- [Generals](#generals)
-  - [Discover](#discover)
-  - [Featured](#featured)
-  - [Charts](#charts)
 - [Get data from ids](#get-data-from-ids)
   - [Users](#users)
     - [User's Generals](#users-generals) 
@@ -83,6 +79,18 @@
     - [Playlist's generals](#playlists-generals)
     - [Playlist reposters](#playlist-reposters)
     - [Playlist likers](#playlist-likers)
+- [Tracks](#tracks)
+    - [Track's generals](#tracks-generals) 
+    - [Related tracks](#related-tracks)
+    - [In albums](#in-albums)
+    - [In playlist](#in-playlist)
+    - [Reposters](#reposters)
+    - [Likers](#likers)
+    - [Track's comments](#tracks-comments)
+- [Generals](#generals)
+  - [Discover](#discover)
+  - [Featured](#featured)
+  - [Charts](#charts)
     
 ## 1. Foreword
 This document is written for Soundcloud v2 API, which has not been officially documented. This version of API is subject to change and may already changed at the time of reading.
@@ -389,7 +397,37 @@ GET 'https://api-v2.soundcloud.com/playlists/{PLAYLIST_ID}/reposters?client_id={
 ```
 GET 'https://api-v2.soundcloud.com/playlists/{PLAYLIST_ID}}/likers?client_id={CLIENT_ID}&limit=9&linked_partitioning=1'
 ```
+#### Tracks
+##### Track's generals 
+To get general information about track
+```
+https://api-v2.soundcloud.com/tracks/{TRACK_ID}?client_id={CLIENT_ID}&linked_partitioning=1
+```
 
+##### Related tracks
+```
+https://api-v2.soundcloud.com/tracks/{TRACK_ID}/related?client_id={CLIENT_ID}&limit=10&linked_partitioning=1
+```
+##### In albums
+```
+https://api-v2.soundcloud.com/tracks/{TRACK_ID}/albums?&client_id={CLIENT_ID}&limit=1&linked_partitioning=1
+```
+##### In playlist
+```
+https://api-v2.soundcloud.com/tracks/{TRACK_ID/playlists_without_albums?client_id={CLIENT_UD}&limit=10&linked_partitioning=1
+```
+##### Reposters
+```
+https://api-v2.soundcloud.com/tracks/{TRACK_ID}/reposters?client_id={CLIENT_ID}&limit=9&linked_partitioning=1
+```
+##### Likers
+```
+https://api-v2.soundcloud.com/tracks/{TRACK_ID}/likers?client_id={CLIENT_ID}&limit=9&linked_partitioning=1
+```
+##### Track's comments
+```
+https://api-v2.soundcloud.com/tracks/{TRACK_ID}/comments?threaded=0&filter_replies=0&client_id={CLIENT_ID}&limit=20&linked_partitioning=1
+```
 ### Generals
 
 #### Featured
