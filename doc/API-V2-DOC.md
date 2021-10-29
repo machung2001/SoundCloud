@@ -33,12 +33,13 @@
     - [x] Playlist likers
     - [x] Playlist Reposters
   - [ ] Tracks
-    - [ ] Comments
-    - [ ] Related (tracks)
-    - [ ] Albums
+    - [ ] Track's generals 
+    - [ ] Track's comments
+    - [ ] Related tracks
+    - [ ] In albums
     - [ ] Reposters
     - [ ] Likers
-    - [ ] Playlist without albums
+    - [ ] In playlist
 	
 - [x] Generals
   - [x] [Discover](https://soundcloud.com/discover)
@@ -384,7 +385,7 @@ GET 'https://api-v2.soundcloud.com/playlists/{PLAYLIST_ID}?client_id={CLIENT_ID}
 ```
 GET 'https://api-v2.soundcloud.com/playlists/{PLAYLIST_ID}/reposters?client_id={CLIENT_ID}&limit=9&linked_partitioning=1'
 ```
-### Playlist likers
+##### Playlist likers
 ```
 GET 'https://api-v2.soundcloud.com/playlists/{PLAYLIST_ID}}/likers?client_id={CLIENT_ID}&limit=9&linked_partitioning=1'
 ```
