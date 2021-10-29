@@ -14,22 +14,22 @@
     - [x] Playlist without albums
   - [x] Tracks
 - [ ] Get data from ids
-  - [ ] Users
-    - [ ] Tracks
-    - [ ] Featured profile
-    - [ ] Spotlight
-    - [ ] Web-profile
-    - [ ] Likes
-    - [ ] Related artist
-    - [ ] Following
-    - [ ] Comments
-    - [ ] Stream
-    - [ ] Top tracks
-    - [ ] Albums
-    - [ ] Playlist without albums
-    - [ ] Reposts
+  - [x] Users
+    - [x] User's Generals 
+    - [x] Tracks
+    - [x] Featured profile
+    - [x] Spotlight
+    - [x] Web-profile
+    - [x] Likes
+    - [x] Related artist
+    - [x] Following
+    - [x] Top tracks
+    - [x] Albums
+    - [x] Playlist without albums
+    - [x] Reposts
+    - [x] Followers
   - [ ] Playlists
-    - [ ] Base
+    - [ ] Generals
     - [ ] Likers
     - [ ] Reposters
   - [ ] Tracks
@@ -62,6 +62,21 @@
   - [Discover](#discover)
   - [Featured](#featured)
   - [Charts](#charts)
+- [Get data from ids](#get-data-from-ids)
+  - [Users](#users)
+    - [User's Generals](#users-generals) 
+    - [Featured profile](#featured-profile)
+    - [Web profile](#web-profile)
+    - [Splotlight](#splotlight)
+    - [User's Tracks](#users-tracks)
+    - [User's Top tracks](#users-top-tracks)
+    - [User's Albums](#users-albums)
+    - [User's Playlist without albums](#users-playlist-without-albums)
+    - [Related Artist](#related-artist)
+    - [Reposts](#reposts)
+    - [likes](#likes)
+    - [Following](#following)
+    - [Followers](#followers)
 ## 1. Foreword
 This document is written for Soundcloud v2 API, which has not been officially documented. This version of API is subject to change and may already changed at the time of reading.
 
@@ -285,6 +300,71 @@ Full URL:
 ```
 GET 'https://api-v2.soundcloud.com/search/playlists_without_albums?q={YOUR_QUERY}&client_id={YOUR_CLIENT_ID}&limit={QUERY_RESULT_LIMIT}&linked_partitioning=1'
 ```
+### Get data from ids
+
+#### Users
+This section requires the user's id for each specific user.
+##### User's Generals
+To get general information about a specific user:
+```
+https://api-v2.soundcloud.com/users/{USER_ID}?client_id={CLIENT_ID}&limit=20&linked_partitioning=1
+```
+With `USER_ID` is the id of a user. For example, a full URL would be:
+```
+https://api-v2.soundcloud.com/users/208026368?client_id=YxQYlFPNletSMSZ4b8Svv9FTYgbNbM79&limit=20&linked_partitioning=1
+```
+
+To get more information about user, some parameter are required, for example: `/tracks`, `/albums` , ...
+
+##### Featured profile
+```
+https://api-v2.soundcloud.com/users/{USER_ID}/featured-profiles?client_id={CLIENT_ID}&limit=10&linked_partitioning=1
+```
+##### Web profile
+```
+https://api-v2.soundcloud.com/users/soundcloud:users:{USER_ID}/web-profiles?client_id={CLIENT_ID}
+```
+##### Splotlight
+```
+https://api-v2.soundcloud.com/users/{USER_ID}/spotlight?client_id={CLIENT_ID}&limit=20&linked_partitioning=1
+```
+##### User's Tracks
+```
+https://api-v2.soundcloud.com/users/{USER_ID}/tracks?client_id={CLIENT_ID}&limit=20&linked_partitioning=1
+```
+##### User's Top tracks
+```
+https://api-v2.soundcloud.com/users/{USER_ID}/toptracks?client_id={CLIENT_ID}&linked_partitioning=1
+```
+##### User's Albums
+```
+https://api-v2.soundcloud.com/users/{USER_ID}/albums?client_id={CLIENT_ID}&limit=10&linked_partitioning=1
+```
+##### User's Playlist without albums
+```
+https://api-v2.soundcloud.com/users/{USER_ID}/playlists_without_albums?client_id={CLIENT_ID}&limit=10&offset=0&linked_partitioning=1
+```
+##### Related Artist
+```
+https://api-v2.soundcloud.com/users/{USER_ID}/relatedartists?client_id={CLIENT_ID}&limit=12&linked_partitioning=1
+```
+##### Reposts
+```
+https://api-v2.soundcloud.com/stream/users/{USER_ID}/reposts?client_id={CLIENT_ID}&limit=10&linked_partitioning=1
+```
+##### Likes
+```
+https://api-v2.soundcloud.com/users/{USER_ID}/likes?client_id={CLIENT_ID}&limit=24&linked_partitioning=1
+```
+##### Following
+```
+https://api-v2.soundcloud.com/users/{USER_ID}/followings?client_id={CLIENT_ID}&limit=3&linked_partitioning=1
+```
+##### Followers
+```
+https://api-v2.soundcloud.com/users/{USER_ID}/followers?client_id={CLIENT_ID}&limit=12&linked_partitioning=1
+```
+
 ### Generals
 
 #### Featured
