@@ -74,7 +74,7 @@
     - [User's Playlist without albums](#users-playlist-without-albums)
     - [Related Artist](#related-artist)
     - [Reposts](#reposts)
-    - [likes](#likes)
+    - [Likes](#likes)
     - [Following](#following)
     - [Followers](#followers)
 ## 1. Foreword
