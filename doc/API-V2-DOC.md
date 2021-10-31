@@ -7,7 +7,7 @@
 - [x] Foreword
 - [x] Querying
   - [x] Parameters explaining
-  - [x] Everything
+  - [x] Anything
   - [x] Users query
   - [x] Playlists query
     - [x] Albums query
@@ -54,7 +54,7 @@
 2. [API](#2-api)
 - [Parameters explaining](#parameters-explaining)
 - [Querying](#querying)
-  - [Everything](#everything)
+  - [Anything](#anything)
   - [Users query](#users-query)
   - [Tracks query](#tracks-query)
   - [Playlists query](#playlists-query)
@@ -153,7 +153,7 @@ GENRE_OPTION = [
 
 ### Querying
 
-#### Everything
+#### Anything
 
 In this section, we will get the result from a query of any type, this will appear in `Everything` tab, the query is what will be input in the SoundCloud search bar.
 
