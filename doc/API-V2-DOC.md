@@ -197,7 +197,7 @@ The response from the above request may be represented in `JSON format:
 
 Parameter `next_href` will be concatenated with `client_id` to produce the next url for api request:
 ```python
-new_url = response['next_href'] + '&{client_id}'
+new_url = response['next_href'] + '&client_id=' + YOUR_CLIENT_ID
 ```
 
 In this case, this url will be:
