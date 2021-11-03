@@ -1,1 +1,2 @@
 # file này sẽ chứa 1 đống client_id. Thông tin thêm: https://developers.soundcloud.com/docs/api/rate-limits#errors
+qgbUmYdRbdAL2R1aLbVCgwzC7mvh8VKv
