@@ -39,11 +39,11 @@ def temp_save(json_data, file):
 #########################################
 
 
-def get_users_id(YOUR_QUERY, YOUR_CLIENT_ID, QUERY_RESULT_LIMIT, RESULT_LIMIT):
+def get_users_id(YOUR_QUERY, YOUR_CLIENT_ID, API_RESULT_LIMIT, RESULT_LIMIT):
     result = []
     full = False
-    url = f'https://api-v2.soundcloud.com/search/users?q={YOUR_QUERY}&client_id={YOUR_CLIENT_ID}&limit={QUERY_RESULT_LIMIT}&linked_partitioning=1'
-    
+    url = f'https://api-v2.soundcloud.com/search/users?q={YOUR_QUERY}&client_id={YOUR_CLIENT_ID}&limit={API_RESULT_LIMIT}&linked_partitioning=1'
+
     while True:
         response = requests.get(url)
         if not response.ok:
@@ -54,7 +54,6 @@ def get_users_id(YOUR_QUERY, YOUR_CLIENT_ID, QUERY_RESULT_LIMIT, RESULT_LIMIT):
             for collection in collections:
                 if len(result) < RESULT_LIMIT:
                     result.append(collection['id'])
-                    print(len(result))
                 else:
                     full = True
                     break
@@ -66,8 +65,8 @@ def get_users_id(YOUR_QUERY, YOUR_CLIENT_ID, QUERY_RESULT_LIMIT, RESULT_LIMIT):
     return result
 
 
-def get_users(YOUR_QUERY, YOUR_CLIENT_ID, QUERY_RESULT_LIMIT, RESULT_LIMIT):
-    users = get_users_id(YOUR_QUERY, YOUR_CLIENT_ID, QUERY_RESULT_LIMIT, RESULT_LIMIT)
+def get_users(YOUR_QUERY, YOUR_CLIENT_ID, API_RESULT_LIMIT, RESULT_LIMIT):
+    users = get_users_id(YOUR_QUERY, YOUR_CLIENT_ID, API_RESULT_LIMIT, RESULT_LIMIT)
     temp = {'id': users}
     temp_save(temp, 'test.json')
     result = []
