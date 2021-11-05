@@ -17,14 +17,6 @@ def track_info(track_id, client_id):
     return result
 
 
-def playlist_info(playlist_id, client_id):
-    result = {}
-
-    url = f'https://api-v2.soundcloud.com/playlists/{playlist_id}?client_id={client_id}&limit=100&linked_partitioning=1'
-
-    return result
-
-
 def user_info(user_id, client_id):
     result = {}
 
