@@ -141,6 +141,83 @@ def get_featured_tracks(client_id, result_limit=50):
         results.append(track_info(track, client_id))
     return featured_tracks
 
+def extract_charts_data(url, client_id):
+    results = []
+    while True:
+        response = requests.get(url)
+        if not response.ok:
+            print(f"Failed {response.url}")
+            continue
+        print(f"Hit {response.url}")
+        try:
+            json_data = response.json()
+            collections = json_data['collection']
+            if not collections:
+                break
+            for collection in collections:
+                # need optimizing here ?
+                results.append(collection['track']['id'])
+            if json_data['next_href'] is None:
+                break
+            url = json_data['next_href'] + f'&client_id={client_id}'
+        except KeyError:
+            break
+    return results
+
+
+def get_charts(client_id):
+    kind_options = ['trending', 'top']
+    genre_options = [
+        'soundcloud:genres:all-music',
+        'soundcloud:genres:all-audio',
+        'soundcloud:genres:alternativerock',
+        'soundcloud:genres:ambient',
+        'soundcloud:genres:classical',
+        'soundcloud:genres:country',
+        'soundcloud:genres:danceedm',
+        'soundcloud:genres:dancehall',
+        'soundcloud:genres:deephouse',
+        'soundcloud:genres:disco',
+        'soundcloud:genres:drumbass',
+        'soundcloud:genres:dubstep',
+        'soundcloud:genres:electronic',
+        'soundcloud:genres:folksingersongwriter',
+        'soundcloud:genres:hiphoprap',
+        'soundcloud:genres:house',
+        'soundcloud:genres:indie',
+        'soundcloud:genres:jazzblues',
+        'soundcloud:genres:latin',
+        'soundcloud:genres:metal',
+        'soundcloud:genres:piano',
+        'soundcloud:genres:pop',
+        'soundcloud:genres:rbsoul',
+        'soundcloud:genres:reggae',
+        'soundcloud:genres:reggaeton',
+        'soundcloud:genres:rock',
+        'soundcloud:genres:soundtrack',
+        'soundcloud:genres:techno',
+        'soundcloud:genres:trance',
+        'soundcloud:genres:trap',
+        'soundcloud:genres:triphop',
+        'soundcloud:genres:world',
+        'soundcloud:genres:audiobooks',
+        'soundcloud:genres:business',
+        'soundcloud:genres:comedy',
+        'soundcloud:genres:entertainment',
+        'soundcloud:genres:learning',
+        'soundcloud:genres:newspolitics',
+        'soundcloud:genres:religionspirituality',
+        'soundcloud:genres:science',
+        'soundcloud:genres:sports',
+        'soundcloud:genres:storytelling',
+        'soundcloud:genres:technology'
+    ]
+    results = []
+    for kind_option in kind_options:
+        for genre_option in genre_options:
+            url = f'https://api-v2.soundcloud.com/charts?kind={kind_option}&genre={genre_option}&client_id={client_id}&linked_partitioning=1&limit=100'
+            results.extend(extract_charts_data(url, client_id))
+    return set(results)
 
 def main():
     client_id = 'qgbUmYdRbdAL2R1aLbVCgwzC7mvh8VKv'
