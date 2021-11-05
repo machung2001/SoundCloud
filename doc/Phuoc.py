@@ -133,6 +133,15 @@ def get_featured_tracks(client_id, result_limit=50):
     return featured_tracks
 
 
+def get_featured_tracks(client_id, result_limit=50):
+    results = []
+    url = f'https://api-v2.soundcloud.com/featured_tracks/top/all-music?linked_partitioning=1&client_id={client_id}&limit=100'
+    featured_tracks = get_id_from_collection(url, client_id, result_limit)
+    for track in featured_tracks:
+        results.append(track_info(track, client_id))
+    return featured_tracks
+
+
 def main():
     client_id = 'qgbUmYdRbdAL2R1aLbVCgwzC7mvh8VKv'
     query = 'imagine dragons'
