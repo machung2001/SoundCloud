@@ -454,7 +454,7 @@ https://api-v2.soundcloud.com/tracks/{TRACK_ID}/albums?&client_id={CLIENT_ID}&li
 ```
 ##### In playlist
 ```
-https://api-v2.soundcloud.com/tracks/{TRACK_ID/playlists_without_albums?client_id={CLIENT_UD}&limit=10&linked_partitioning=1
+https://api-v2.soundcloud.com/tracks/{TRACK_ID}/playlists_without_albums?client_id={CLIENT_ID}&limit=10&linked_partitioning=1
 ```
 ##### Reposters
 ```
