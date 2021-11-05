@@ -51,26 +51,24 @@ class QueryType(Enum):
     PLAYLISTS = 3
 
 
-def get_query_item_ids(url, result_limit, client_id):
+def get_id_from_collection(url, client_id, result_limit):
     results = []
     full = False
     while True:
-        time.sleep(1)
         response = requests.get(url)
         if not response.ok:
             print(f"Failed {response.url}")
             continue
         print(f"Hit {response.url}")
-        json_data = response.json()
         try:
-            collections = json_data['collection']
-            for collection in collections:
+            json_data = response.json()
+            for collection in json_data['collection']:
                 if len(results) < result_limit:
                     results.append(collection['id'])
                 else:
                     full = True
                     break
-            if full:
+            if full or json_data['next_href'] is None:
                 break
             url = json_data['next_href'] + f'&client_id={client_id}'
         except KeyError:
@@ -97,21 +95,52 @@ def get_query_item(q_type, query, client_id, api_result_limit, result_limit):
 
     if q_type == QueryType.PLAYLISTS:
         result_limit //= 2
-    item_ids = get_query_item_ids(url, result_limit, client_id)
+    item_ids = get_id_from_collection(url, client_id, result_limit)
     if sub_url:
-        item_ids.extend(get_query_item_ids(sub_url, result_limit, client_id))
-
-    temp_save({'id': item_ids}, 'test.json')
-
+        item_ids.extend(get_id_from_collection(sub_url, client_id, result_limit))
     for item_id in item_ids:
         results.append(func(item_id, client_id))
+    return results
+
+
+def extract_playlist_generals(playlist_id, client_id):
+    url = f'https://api-v2.soundcloud.com/playlists/{playlist_id}?client_id={client_id}&limit=9&linked_partitioning=1'
+    while True:
+        time.sleep(1)
+        response = requests.get(url)
+        if not response.ok:
+            print(f"Failed {response.url}")
+            continue
+        break
+
+    print(f"Hit {response.url}")
+    generals_data = response.json()
+    generals_data['user'] = generals_data['user']['id']
+    print(generals_data['user'])
+    tracks_list = []
+    for track in generals_data['tracks']:
+        tracks_list.append(track['id'])
+    generals_data['tracks'] = tracks_list
+    return generals_data
+
+
+def playlist_info(playlist_id, client_id):
+    reposters_url = f'https://api-v2.soundcloud.com/playlists/{playlist_id}/reposters?client_id={client_id}&limit=9&linked_partitioning=1'
+    likers_url = f'https://api-v2.soundcloud.com/playlists/{playlist_id}/likers?client_id={client_id}&limit=9&linked_partitioning=1'
+    generals_data = extract_playlist_generals(playlist_id, client_id)
+    generals_data['reposters'] = get_id_from_collection(reposters_url, client_id, 100)
+    generals_data['likers'] = get_id_from_collection(likers_url, client_id, 100)
+
 
 
 def main():
     client_id = 'qgbUmYdRbdAL2R1aLbVCgwzC7mvh8VKv'
     query = 'imagine dragons'
-    api_result_limit = 200
+    api_result_limit = 100
     get_query_item(QueryType.PLAYLISTS, query, client_id, api_result_limit, 1000)
-
+    ###################
+    client_id = 'nGKlrpy2IotLQ0QGwBOmIgSFayis6H4e'
+    playlist_id = '9801343'
+    playlist_info(playlist_id, client_id)
 
 main()
