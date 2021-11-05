@@ -127,6 +127,10 @@ def playlist_info(playlist_id, client_id):
     generals_data['reposters'] = get_id_from_collection(reposters_url, client_id, 100)
     generals_data['likers'] = get_id_from_collection(likers_url, client_id, 100)
 
+def get_featured_tracks(client_id, result_limit=50):
+    url = f'https://api-v2.soundcloud.com/featured_tracks/top/all-music?linked_partitioning=1&client_id={client_id}&limit=100'
+    featured_tracks = get_id_from_collection(url, client_id, result_limit)
+    return featured_tracks
 
 
 def main():
