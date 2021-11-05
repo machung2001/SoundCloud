@@ -145,9 +145,49 @@ genre={GENRE_OPTION}
 - Use in `charts`, there're x available value to this field:
 ```
 GENRE_OPTION = [
-	soundcloud:genres:all-music,
-	soundcloud:genres:all-audio,
-	.... lam bieng qua
+	soundcloud:genres:all-music
+	soundcloud:genres:all-audio
+	soundcloud:genres:alternativerock
+	soundcloud:genres:ambient
+	soundcloud:genres:classical
+	soundcloud:genres:country
+	soundcloud:genres:danceedm
+	soundcloud:genres:dancehall
+	soundcloud:genres:deephouse
+	soundcloud:genres:disco
+	soundcloud:genres:drumbass
+	soundcloud:genres:dubstep
+	soundcloud:genres:electronic
+	soundcloud:genres:folksingersongwriter
+	soundcloud:genres:hiphoprap
+	soundcloud:genres:house
+	soundcloud:genres:indie
+	soundcloud:genres:jazzblues
+	soundcloud:genres:latin
+	soundcloud:genres:metal
+	soundcloud:genres:piano
+	soundcloud:genres:pop
+	soundcloud:genres:rbsoul
+	soundcloud:genres:reggae
+	soundcloud:genres:reggaeton
+	soundcloud:genres:rock
+	soundcloud:genres:soundtrack
+	soundcloud:genres:techno
+	soundcloud:genres:trance
+	soundcloud:genres:trap
+	soundcloud:genres:triphop
+	soundcloud:genres:world
+	soundcloud:genres:audiobooks
+	soundcloud:genres:business
+	soundcloud:genres:comedy
+	soundcloud:genres:entertainment
+	soundcloud:genres:learning
+	soundcloud:genres:newspolitics
+	soundcloud:genres:religionspirituality
+	soundcloud:genres:science
+	soundcloud:genres:sports
+	soundcloud:genres:storytelling
+	soundcloud:genres:technology
 ]
 ```
 
@@ -197,7 +237,7 @@ The response from the above request may be represented in `JSON format:
 
 Parameter `next_href` will be concatenated with `client_id` to produce the next url for api request:
 ```python
-new_url = response['next_href'] + '&{client_id}'
+new_url = response['next_href'] + '&client_id=' + YOUR_CLIENT_ID
 ```
 
 In this case, this url will be:
@@ -414,7 +454,7 @@ https://api-v2.soundcloud.com/tracks/{TRACK_ID}/albums?&client_id={CLIENT_ID}&li
 ```
 ##### In playlist
 ```
-https://api-v2.soundcloud.com/tracks/{TRACK_ID/playlists_without_albums?client_id={CLIENT_UD}&limit=10&linked_partitioning=1
+https://api-v2.soundcloud.com/tracks/{TRACK_ID}/playlists_without_albums?client_id={CLIENT_ID}&limit=10&linked_partitioning=1
 ```
 ##### Reposters
 ```
