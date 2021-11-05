@@ -68,7 +68,7 @@ def get_id_from_collection(url, client_id, result_limit):
             url = json_data['next_href'] + f'&client_id={client_id}'
         except KeyError:
             break
-    return results
+    return set(results)
 
 
 
@@ -162,7 +162,7 @@ def extract_charts_data(url, client_id):
             url = json_data['next_href'] + f'&client_id={client_id}'
         except KeyError:
             break
-    return results
+    return set(results)
 
 
 def get_charts(client_id):
@@ -212,12 +212,17 @@ def get_charts(client_id):
         'soundcloud:genres:storytelling',
         'soundcloud:genres:technology'
     ]
+    charts_tracks = []
     results = []
     for kind_option in kind_options:
         for genre_option in genre_options:
             url = f'https://api-v2.soundcloud.com/charts?kind={kind_option}&genre={genre_option}&client_id={client_id}&linked_partitioning=1&limit=100'
-            results.extend(extract_charts_data(url, client_id))
-    return set(results)
+            charts_tracks.extend(extract_charts_data(url, client_id))
+    charts_tracks =  set(charts_tracks)
+    for track in charts_tracks:
+        results.append(track_info(track, client_id))
+    return results
+        
 
 def main():
     client_id = 'qgbUmYdRbdAL2R1aLbVCgwzC7mvh8VKv'
