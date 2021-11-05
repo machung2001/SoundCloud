@@ -54,7 +54,10 @@ def get_id_from_collection(url, client_id, result_limit):
         print(f"Hit {response.url}")
         try:
             json_data = response.json()
-            for collection in json_data['collection']:
+            collections = json_data['collection']
+            if not collections:
+                break
+            for collection in collections:
                 if len(results) < result_limit:
                     results.append(collection['id'])
                 else:
@@ -66,6 +69,7 @@ def get_id_from_collection(url, client_id, result_limit):
         except KeyError:
             break
     return results
+
 
 
 def get_query_item(q_type, query, client_id, api_result_limit, result_limit):
