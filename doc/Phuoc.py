@@ -58,7 +58,7 @@ def get_id_from_collection(url, client_id, result_limit):
             if not collections:
                 break
             for collection in collections:
-                if len(results) < result_limit:
+                if len(results) < result_limit or result_limit==-1:
                     results.append(collection['id'])
                 else:
                     full = True
