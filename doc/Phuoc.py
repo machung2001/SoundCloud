@@ -37,10 +37,9 @@ def temp_save(json_data, file):
 #########################################
 
 class QueryType(Enum):
-    ANYTHING = 0
-    USERS = 1
-    TRACKS = 2
-    PLAYLISTS = 3
+    USERS = 0
+    TRACKS = 1
+    PLAYLISTS = 2
 
 
 def get_id_from_collection(url, client_id, result_limit):
@@ -58,7 +57,7 @@ def get_id_from_collection(url, client_id, result_limit):
             if not collections:
                 break
             for collection in collections:
-                if len(results) < result_limit or result_limit==-1:
+                if len(results) < result_limit or result_limit == -1:
                     results.append(collection['id'])
                 else:
                     full = True
@@ -68,8 +67,7 @@ def get_id_from_collection(url, client_id, result_limit):
             url = json_data['next_href'] + f'&client_id={client_id}'
         except KeyError:
             break
-    return set(results)
-
+    return list(set(results))
 
 
 def get_query_item(q_type, query, client_id, api_result_limit, result_limit):
@@ -116,7 +114,7 @@ def extract_playlist_generals(playlist_id, client_id):
     tracks_list = []
     for track in generals_data['tracks']:
         tracks_list.append(track['id'])
-    generals_data['tracks'] = tracks_list
+    generals_data['tracks'] = list(set(tracks_list))
     return generals_data
 
 
@@ -127,11 +125,6 @@ def playlist_info(playlist_id, client_id):
     generals_data['reposters'] = get_id_from_collection(reposters_url, client_id, 100)
     generals_data['likers'] = get_id_from_collection(likers_url, client_id, 100)
 
-def get_featured_tracks(client_id, result_limit=50):
-    url = f'https://api-v2.soundcloud.com/featured_tracks/top/all-music?linked_partitioning=1&client_id={client_id}&limit=100'
-    featured_tracks = get_id_from_collection(url, client_id, result_limit)
-    return featured_tracks
-
 
 def get_featured_tracks(client_id, result_limit=50):
     results = []
@@ -140,6 +133,7 @@ def get_featured_tracks(client_id, result_limit=50):
     for track in featured_tracks:
         results.append(track_info(track, client_id))
     return featured_tracks
+
 
 def extract_charts_data(url, client_id):
     results = []
@@ -162,7 +156,7 @@ def extract_charts_data(url, client_id):
             url = json_data['next_href'] + f'&client_id={client_id}'
         except KeyError:
             break
-    return set(results)
+    return list(set(results))
 
 
 def get_charts(client_id):
@@ -218,11 +212,11 @@ def get_charts(client_id):
         for genre_option in genre_options:
             url = f'https://api-v2.soundcloud.com/charts?kind={kind_option}&genre={genre_option}&client_id={client_id}&linked_partitioning=1&limit=100'
             charts_tracks.extend(extract_charts_data(url, client_id))
-    charts_tracks =  set(charts_tracks)
+    charts_tracks = set(charts_tracks)
     for track in charts_tracks:
         results.append(track_info(track, client_id))
     return results
-        
+
 
 def main():
     client_id = 'qgbUmYdRbdAL2R1aLbVCgwzC7mvh8VKv'
@@ -233,5 +227,6 @@ def main():
     client_id = 'nGKlrpy2IotLQ0QGwBOmIgSFayis6H4e'
     playlist_id = '9801343'
     playlist_info(playlist_id, client_id)
+
 
 main()
