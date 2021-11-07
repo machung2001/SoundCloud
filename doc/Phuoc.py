@@ -217,7 +217,7 @@ def main():
     client_id = 'qgbUmYdRbdAL2R1aLbVCgwzC7mvh8VKv'
     query = 'imagine dragons'
     api_result_limit = 100
-    result = get_query_item(QueryType.PLAYLISTS, query, client_id, api_result_limit, 1000)
-
+    result = get_charts(client_id)
+    print(len(result))
 
 main()
