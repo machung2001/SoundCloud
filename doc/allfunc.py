@@ -21,7 +21,7 @@ def request_url(url, max_req=20):
         if not response.ok:
             print(f"Failed {response.url}")
             req += 1
-            if req < 20:
+            if req < max_req:
                 continue
             else:
                 raise ConnectionError("Check your internet or url again")
@@ -219,12 +219,12 @@ def extract_track_generals(track_id, client_id):
 
 
 def track_info(track_id, client_id):
-    reposters_url = f'https://api-v2.soundcloud.com/tracks/{track_id}/reposters?client_id={client_id}&limit=9&linked_partitioning=1'
-    likers_url = f'https://api-v2.soundcloud.com/tracks/{track_id}/likers?client_id={client_id}&limit=9&linked_partitioning=1'
-    related_tracks_url = f'https://api-v2.soundcloud.com/tracks/{track_id}/related?client_id={client_id}&limit=10&linked_partitioning=1'
-    album_url = f'https://api-v2.soundcloud.com/tracks/{track_id}/albums?&client_id={client_id}&limit=1&linked_partitioning=1'
-    playlists_url = f'https://api-v2.soundcloud.com/tracks/{track_id}/playlists_without_albums?client_id={client_id}&limit=10&linked_partitioning=1'
-    comments_url = f'https://api-v2.soundcloud.com/tracks/{track_id}/comments?threaded=0&filter_replies=0&client_id={client_id}&limit=20&linked_partitioning=1'
+    reposters_url = f'https://api-v2.soundcloud.com/tracks/{track_id}/reposters?client_id={client_id}&limit=100&linked_partitioning=1'
+    likers_url = f'https://api-v2.soundcloud.com/tracks/{track_id}/likers?client_id={client_id}&limit=100&linked_partitioning=1'
+    related_tracks_url = f'https://api-v2.soundcloud.com/tracks/{track_id}/related?client_id={client_id}&limit=100&linked_partitioning=1'
+    album_url = f'https://api-v2.soundcloud.com/tracks/{track_id}/albums?&client_id={client_id}&limit=100&linked_partitioning=1'
+    playlists_url = f'https://api-v2.soundcloud.com/tracks/{track_id}/playlists_without_albums?client_id={client_id}&limit=100&linked_partitioning=1'
+    comments_url = f'https://api-v2.soundcloud.com/tracks/{track_id}/comments?threaded=0&filter_replies=0&client_id={client_id}&limit=100&linked_partitioning=1'
 
     generals_data = extract_track_generals(track_id, client_id)
     generals_data['reposters'] = get_id_from_collection(reposters_url, client_id, 100)
@@ -239,16 +239,16 @@ def track_info(track_id, client_id):
 def user_info(user_id, client_id):
     general_url = f'https://api-v2.soundcloud.com/users/{user_id}?client_id={client_id}&limit=100&linked_partitioning=1'
     web_profile_url = f'https://api-v2.soundcloud.com/users/soundcloud:users:{user_id}/web-profiles?client_id={client_id}'
-    spotlight_url = f'https://api-v2.soundcloud.com/users/{user_id}/spotlight?client_id={client_id}&limit=20&linked_partitioning=1'
-    user_tracks_url = f'https://api-v2.soundcloud.com/users/{user_id}/tracks?client_id={client_id}&limit=20&linked_partitioning=1'
+    spotlight_url = f'https://api-v2.soundcloud.com/users/{user_id}/spotlight?client_id={client_id}&limit=100&linked_partitioning=1'
+    user_tracks_url = f'https://api-v2.soundcloud.com/users/{user_id}/tracks?client_id={client_id}&limit=100&linked_partitioning=1'
     user_top_tracks_url = f'https://api-v2.soundcloud.com/users/{user_id}/toptracks?client_id={client_id}&linked_partitioning=1'
-    user_albums_url = f'https://api-v2.soundcloud.com/users/{user_id}/albums?client_id={client_id}&limit=10&linked_partitioning=1'
-    user_playlist_without_albums_url = f'https://api-v2.soundcloud.com/users/{user_id}/playlists_without_albums?client_id={client_id}&limit=10&linked_partitioning=1'
-    related_artist_url = f'https://api-v2.soundcloud.com/users/{user_id}/relatedartists?client_id={client_id}&limit=12&linked_partitioning=1'
-    reposts_url = f'https://api-v2.soundcloud.com/stream/users/{user_id}/reposts?client_id={client_id}&limit=10&linked_partitioning=1'
-    likes_url = f'https://api-v2.soundcloud.com/users/{user_id}/likes?client_id={client_id}&limit=24&linked_partitioning=1'
-    followings_url = f'https://api-v2.soundcloud.com/users/{user_id}/followings?client_id={client_id}&limit=3&linked_partitioning=1'
-    followers_url = f'https://api-v2.soundcloud.com/users/{user_id}/followers?client_id={client_id}&limit=12&linked_partitioning=1'
+    user_albums_url = f'https://api-v2.soundcloud.com/users/{user_id}/albums?client_id={client_id}&limit=100&linked_partitioning=1'
+    user_playlist_without_albums_url = f'https://api-v2.soundcloud.com/users/{user_id}/playlists_without_albums?client_id={client_id}&limit=100&linked_partitioning=1'
+    related_artist_url = f'https://api-v2.soundcloud.com/users/{user_id}/relatedartists?client_id={client_id}&limit=100&linked_partitioning=1'
+    reposts_url = f'https://api-v2.soundcloud.com/stream/users/{user_id}/reposts?client_id={client_id}&limit=100&linked_partitioning=1'
+    likes_url = f'https://api-v2.soundcloud.com/users/{user_id}/likes?client_id={client_id}&limit=100&linked_partitioning=1'
+    followings_url = f'https://api-v2.soundcloud.com/users/{user_id}/followings?client_id={client_id}&limit=100&linked_partitioning=1'
+    followers_url = f'https://api-v2.soundcloud.com/users/{user_id}/followers?client_id={client_id}&limit=100&linked_partitioning=1'
 
     generals_data = request_url(general_url)
     generals_data['web_profile'] = request_url(web_profile_url)
