@@ -3,8 +3,9 @@ from enum import Enum
 
 import requests
 
-
 #####################
+# testing variable, print this to see how many requests has been made
+TOTAL_REQ = 0
 
 # save to some file to debug results
 def temp_save(json_data, file):
@@ -15,6 +16,7 @@ def temp_save(json_data, file):
 #########################################
 
 def request_url(url, max_req=20):
+    global TOTAL_REQ
     req = 0
     while True:
         response = requests.get(url)
@@ -27,6 +29,8 @@ def request_url(url, max_req=20):
                 raise ConnectionError("Check your internet or url again")
         break
     print(f"Hit {response.url}")
+    # Testing variable
+    TOTAL_REQ += 1
     return response.json()
 
 
