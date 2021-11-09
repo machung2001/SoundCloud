@@ -278,9 +278,11 @@ def user_info(user_id, client_id):
     generals_data.pop('badges')
 
     web_profile = generals_data.pop('web_profile', None)
+    socials = []
     if web_profile:
         for social in web_profile:
-            generals_data[social['network']] = social['url']
+            socials.append(social['url'])
+    generals_data['socials'] = socials
 
     return generals_data
 
