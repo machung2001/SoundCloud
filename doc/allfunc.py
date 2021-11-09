@@ -3,6 +3,7 @@ from enum import Enum
 
 import requests
 
+
 #####################
 
 # save to some file to debug results
@@ -14,11 +15,9 @@ def temp_save(json_data, file):
 #########################################
 
 def request_url(url, max_req=20):
-    global TOTAL_REQ
     req = 0
     while True:
         response = requests.get(url)
-        TOTAL_REQ += 1
         if not response.ok:
             print(f"Failed {response.url}")
             req += 1
@@ -284,4 +283,10 @@ def user_info(user_id, client_id):
 
 def main():
     client_id = 'qgbUmYdRbdAL2R1aLbVCgwzC7mvh8VKv'
+    query = 'imagine dragon'
+    query_result_users = get_query_item(QueryType.USERS, query, client_id, 100)
+    query_result_tracks = get_query_item(QueryType.TRACKS, query, client_id, 100)
+    query_result_playlist = get_query_item(QueryType.PLAYLISTS, query, client_id, 100)
+
+
 main()
