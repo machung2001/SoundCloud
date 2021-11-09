@@ -3,7 +3,6 @@ from enum import Enum
 
 import requests
 
-
 #####################
 
 # save to some file to debug results
@@ -15,9 +14,11 @@ def temp_save(json_data, file):
 #########################################
 
 def request_url(url, max_req=20):
+    global TOTAL_REQ
     req = 0
     while True:
         response = requests.get(url)
+        TOTAL_REQ += 1
         if not response.ok:
             print(f"Failed {response.url}")
             req += 1
@@ -233,6 +234,10 @@ def track_info(track_id, client_id):
     generals_data['related_tracks'] = get_id_from_collection(related_tracks_url, client_id, 100)
     generals_data['album'] = get_id_from_collection(album_url, client_id, 100)
     generals_data['playlists'] = get_id_from_collection(playlists_url, client_id, 100)
+
+    generals_data.pop('publisher_metadata')
+    generals_data.pop('media')
+    generals_data.pop('visuals')
     return generals_data
 
 
@@ -256,12 +261,24 @@ def user_info(user_id, client_id):
     generals_data['user_tracks'] = get_id_from_collection(user_tracks_url, client_id, 100)
     generals_data['user_top_tracks'] = get_id_from_collection(user_top_tracks_url, client_id, 100)
     generals_data['user_albums'] = get_id_from_collection(user_albums_url, client_id, 100)
-    generals_data['user_playlist_without_albums'] = get_id_from_collection(user_playlist_without_albums_url, client_id, 100)
+    generals_data['user_playlist_without_albums'] = get_id_from_collection(user_playlist_without_albums_url, client_id,
+                                                                           100)
     generals_data['related_artist'] = get_id_from_collection(related_artist_url, client_id, 100)
     generals_data['followings'] = get_id_from_collection(followings_url, client_id, 100)
     generals_data['followers'] = get_id_from_collection(followers_url, client_id, 100)
     generals_data['reposts'] = get_id_from_collection(reposts_url, client_id, 100, 'track')
     generals_data['likes'] = get_id_from_collection(likes_url, client_id, 100, 'track')
+
+    generals_data.pop('creator_subscription')
+    generals_data.pop('creator_subscriptions')
+    generals_data.pop('visuals')
+    generals_data.pop('badges')
+
+    web_profile = generals_data.pop('web_profile', None)
+    if web_profile:
+        for social in web_profile:
+            generals_data[social['network']] = social['url']
+
     return generals_data
 
 
