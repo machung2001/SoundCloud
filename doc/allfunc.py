@@ -4,7 +4,7 @@ from enum import Enum
 import requests
 
 #####################
-# testing variable, print this to see how many requests has been made
+# testing variable, print this to see how many requests ha been made
 TOTAL_REQ = 0
 
 # save to some file to debug results
