@@ -9,7 +9,6 @@ import aiohttp
 TOTAL_REQ = 0
 
 
-
 def savefile(file_name, json_data):
     keys = set()
     for d in json_data:
@@ -101,6 +100,8 @@ async def get_query_item(q_type, query, client_id, result_limit):
     item_ids = await get_id_from_collection(url, client_id, result_limit)
     if sub_url:
         item_ids.extend(await get_id_from_collection(sub_url, client_id, result_limit))
+    # TODO:
+    item_ids = item_ids[:3]
     print(f"Found {len(item_ids)} items for type {q_type.name} with {query} keyword")
     for item_id in item_ids:
         item_info = await func(item_id, client_id)
@@ -136,7 +137,9 @@ async def get_featured_tracks(client_id, result_limit=50):
     print("get_featured_ran")
     results = []
     url = f'https://api-v2.soundcloud.com/featured_tracks/top/all-music?linked_partitioning=1&client_id={client_id}&limit=100'
-    featured_tracks = set(await get_id_from_collection(url, client_id, result_limit))
+    featured_tracks = await get_id_from_collection(url, client_id, result_limit)
+    # TODO:
+    featured_tracks = featured_tracks[:2]
     print(f"Found {len(featured_tracks)} featured tracks")
     for track in featured_tracks:
         ti = await track_info(track, client_id)
@@ -205,7 +208,9 @@ async def get_charts(client_id):
         for genre_option in genre_options:
             url = f'https://api-v2.soundcloud.com/charts?kind={kind_option}&genre={genre_option}&client_id={client_id}&linked_partitioning=1&limit=100'
             charts_tracks.extend(await extract_charts_data(url, client_id))
-    charts_tracks = set(charts_tracks)
+    charts_tracks = list(set(charts_tracks))
+    # TODO:
+    charts_tracks = charts_tracks[:2]
     print(f"Found {len(charts_tracks)} charts tracks")
     for track in charts_tracks:
         ti = await track_info(track, client_id)
@@ -239,6 +244,9 @@ async def get_discover_id(client_id):
 async def get_discover(client_id):
     print("get_discover_ran")
     tracks, playlists = await get_discover_id(client_id)
+    # TODO:
+    playlists = playlists[:2]
+    tracks = tracks[:2]
     print(f"Found {len(tracks)} discover tracks")
     print(f"Found {len(playlists)} discover playlist")
 
@@ -303,9 +311,8 @@ async def user_info(user_id, client_id):
     followers_url = f'https://api-v2.soundcloud.com/users/{user_id}/followers?client_id={client_id}&limit=100&linked_partitioning=1'
 
     generals_data = await request_url(general_url)
-    web_profile = await request_url(web_profile_url)
-    if generals_data and web_profile:
-        generals_data['web_profile'] = web_profile
+    if generals_data:
+        generals_data['web_profile'] = await request_url(web_profile_url)
         generals_data['spotlight_tracks'] = await get_id_from_collection(spotlight_url, client_id, 100)
         generals_data['user_tracks'] = await get_id_from_collection(user_tracks_url, client_id, 100)
         generals_data['user_top_tracks'] = await get_id_from_collection(user_top_tracks_url, client_id, 100)
@@ -337,7 +344,7 @@ async def user_info(user_id, client_id):
 async def main():
     client_id = 'qgbUmYdRbdAL2R1aLbVCgwzC7mvh8VKv'
 
-    keyword_list = ['hello', 'hi', 'sup']
+    keyword_list = ['hello', 'hi', 'sup', 'imagine dragon']
     query_tasks = []
     for keyword in keyword_list:
         tasks = asyncio.gather(
@@ -353,5 +360,7 @@ async def main():
         get_featured_tracks(client_id)
     )
     results = await asyncio.gather(general_tasks, query_tasks)
+    temp_save(results, 'data.json')
 
-asyncio.run(main())
+
+asyncio.get_event_loop().run_until_complete(main())
