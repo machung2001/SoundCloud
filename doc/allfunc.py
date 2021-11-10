@@ -2,22 +2,14 @@ import json
 from enum import Enum
 
 import requests
-<<<<<<< Updated upstream
 import csv
-=======
-<<<<<<< HEAD
-import csv
-import pandas as pd
-=======
->>>>>>> 98f5d1331c15941b5c88d66cb69722d8f7f4d6f2
->>>>>>> Stashed changes
+
 
 #####################
 # testing variable, print this to see how many requests ha been made
 TOTAL_REQ = 0
 
 
-<<<<<<< Updated upstream
 def savefile(file_name, json_data):
     keys = set()
     for d in json_data:
@@ -29,7 +21,6 @@ def savefile(file_name, json_data):
         dict_writer.writerows(json_data)
 
 
-=======
 def savefile(file_name,json_data):
     keys = set()
     for d in json_data:
@@ -39,7 +30,6 @@ def savefile(file_name,json_data):
         dict_writer = csv.DictWriter(output_file, restval="-", fieldnames=keys,delimiter = '\t')
         dict_writer.writeheader()
         dict_writer.writerows(json_data)
->>>>>>> Stashed changes
 # save to some file to debug results
 def temp_save(json_data, file):
     with open(file, 'w') as f:
@@ -48,11 +38,7 @@ def temp_save(json_data, file):
 
 #########################################
 
-<<<<<<< Updated upstream
-def request_url(url, max_req=10):
-=======
 def request_url(url, max_req=20):
->>>>>>> Stashed changes
     global TOTAL_REQ
     req = 0
     while True:
@@ -66,11 +52,7 @@ def request_url(url, max_req=20):
                 print(f'Aborted url: {response.url}')
                 return {}
         break
-<<<<<<< Updated upstream
-    #print(f"Hit {response.url}")
-=======
     print(f"Hit {response.url}")
->>>>>>> Stashed changes
     # Testing variable
     TOTAL_REQ += 1
     return response.json()
