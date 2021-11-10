@@ -298,7 +298,6 @@ def user_info(user_id, client_id):
     followers_url = f'https://api-v2.soundcloud.com/users/{user_id}/followers?client_id={client_id}&limit=100&linked_partitioning=1'
 
     generals_data = request_url(general_url)
-<<<<<<< Updated upstream
     web_profile = request_url(web_profile_url)
     if generals_data and web_profile:
         generals_data['web_profile'] = web_profile
@@ -325,32 +324,6 @@ def user_info(user_id, client_id):
             for social in web_profile:
                 socials.append(social['url'])
         generals_data['socials'] = socials
-=======
-    generals_data['web_profile'] = request_url(web_profile_url)
-    generals_data['spotlight_tracks'] = get_id_from_collection(spotlight_url, client_id, 100)
-    generals_data['user_tracks'] = get_id_from_collection(user_tracks_url, client_id, 100)
-    generals_data['user_top_tracks'] = get_id_from_collection(user_top_tracks_url, client_id, 100)
-    generals_data['user_albums'] = get_id_from_collection(user_albums_url, client_id, 100)
-    generals_data['user_playlist_without_albums'] = get_id_from_collection(user_playlist_without_albums_url, client_id,
-                                                                           100)
-    generals_data['related_artist'] = get_id_from_collection(related_artist_url, client_id, 100)
-    generals_data['followings'] = get_id_from_collection(followings_url, client_id, 100)
-    generals_data['followers'] = get_id_from_collection(followers_url, client_id, 100)
-    generals_data['reposts'] = get_id_from_collection(reposts_url, client_id, 100, 'track')
-    generals_data['likes'] = get_id_from_collection(likes_url, client_id, 100, 'track')
-
-    generals_data.pop('creator_subscription')
-    generals_data.pop('creator_subscriptions')
-    generals_data.pop('visuals')
-    generals_data.pop('badges')
-
-    web_profile = generals_data.pop('web_profile', None)
-    socials = []
-    if web_profile:
-        for social in web_profile:
-            socials.append(social['url'])
-    generals_data['socials'] = socials
->>>>>>> Stashed changes
 
     return generals_data
 
