@@ -2,10 +2,23 @@ import json
 from enum import Enum
 
 import requests
-
+import csv
+import pandas as pd
 #####################
 # testing variable, print this to see how many requests ha been made
 TOTAL_REQ = 0
+
+
+
+def savefile(file_name,json_data):
+    keys = set()
+    for d in json_data:
+        keys.update(d.keys())
+    keys=sorted(keys)
+    with open(file_name, 'a',encoding = 'utf-8') as output_file:
+        dict_writer = csv.DictWriter(output_file, restval="-", fieldnames=keys,delimiter = '\t')
+        dict_writer.writeheader()
+        dict_writer.writerows(json_data)
 
 # save to some file to debug results
 def temp_save(json_data, file):
