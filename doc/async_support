@@ -39,9 +39,9 @@ async def request_url(url, max_req=10):
                     if req < max_req:
                         continue
                     else:
-                        print(f'Aborted url: {response.url}')
+                        #print(f'Aborted url: {response.url}')
                         return {}
-                print(f"Hit {response.url}")
+                #print(f"Hit {response.url}")
                 # Testing variable
                 TOTAL_REQ += 1
                 return await response.json()
@@ -132,10 +132,12 @@ async def get_featured_tracks(client_id, result_limit=50):
     results = []
     url = f'https://api-v2.soundcloud.com/featured_tracks/top/all-music?linked_partitioning=1&client_id={client_id}&limit=100'
     featured_tracks = set(await get_id_from_collection(url, client_id, result_limit))
+    print(f"Found {len(featured_tracks)} featured tracks")
     for track in featured_tracks:
         ti = await track_info(track, client_id)
         if ti:
             results.append(ti)
+            print(f"Complete {len(results)} / {len(featured_tracks)} featured tracks")
     return results
 
 
@@ -199,10 +201,12 @@ async def get_charts(client_id):
             url = f'https://api-v2.soundcloud.com/charts?kind={kind_option}&genre={genre_option}&client_id={client_id}&linked_partitioning=1&limit=100'
             charts_tracks.extend(await extract_charts_data(url, client_id))
     charts_tracks = set(charts_tracks)
+    print(f"Found {len(charts_tracks)} charts tracks")
     for track in charts_tracks:
         ti = await track_info(track, client_id)
         if ti:
             results.append(ti)
+            print(f"Complete {len(results)} / {len(charts_tracks)} charts tracks")
     return results
 
 
@@ -230,6 +234,8 @@ async def get_discover_id(client_id):
 async def get_discover(client_id):
     print("get_discover_ran")
     tracks, playlists = await get_discover_id(client_id)
+    print(f"Found {len(tracks)} discover tracks")
+    print(f"Found {len(playlists)} discover playlist")
 
     track_result = []
     playlist_result = []
@@ -237,10 +243,12 @@ async def get_discover(client_id):
         ti = await track_info(track_id, client_id)
         if ti:
             track_result.append(ti)
+            print(f"Complete {len(track_result)} / {len(tracks)} discover tracks")
     for playlist_id in playlists:
         pi = await playlist_info(playlist_id, client_id)
         if pi:
             playlist_result.append(pi)
+            print(f"Complete {len(playlist_result)} / {len(playlists)} discover playlists ")
     return track_result, playlist_result
 
 
@@ -323,5 +331,5 @@ async def user_info(user_id, client_id):
 
 async def main():
     client_id = 'qgbUmYdRbdAL2R1aLbVCgwzC7mvh8VKv'
-    await asyncio.gather(get_discover(client_id), get_featured_tracks(client_id), get_charts(client_id))
+    discover_results, featured_results, charts_results = await asyncio.gather(get_discover(client_id), get_featured_tracks(client_id), get_charts(client_id))
 asyncio.run(main())
