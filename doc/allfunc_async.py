@@ -3,9 +3,11 @@ from enum import Enum
 import asyncio
 import csv
 import aiohttp
+
 #####################
 # testing variable, print this to see how many requests ha been made
 TOTAL_REQ = 0
+
 
 
 def savefile(file_name, json_data):
@@ -39,9 +41,9 @@ async def request_url(url, max_req=10):
                     if req < max_req:
                         continue
                     else:
-                        #print(f'Aborted url: {response.url}')
+                        print(f'Aborted url: {response.url}')
                         return {}
-                #print(f"Hit {response.url}")
+                # print(f"Hit {response.url}")
                 # Testing variable
                 TOTAL_REQ += 1
                 return await response.json()
@@ -80,6 +82,7 @@ async def get_id_from_collection(url, client_id, result_limit, option=None):
 
 
 async def get_query_item(q_type, query, client_id, result_limit):
+    print(f"getting '{q_type.name}' query for {query} keywords")
     results = []
     sub_url = ''
     if q_type == QueryType.USERS:
@@ -98,10 +101,12 @@ async def get_query_item(q_type, query, client_id, result_limit):
     item_ids = await get_id_from_collection(url, client_id, result_limit)
     if sub_url:
         item_ids.extend(await get_id_from_collection(sub_url, client_id, result_limit))
+    print(f"Found {len(item_ids)} items for type {q_type.name} with {query} keyword")
     for item_id in item_ids:
         item_info = await func(item_id, client_id)
         if item_info:
             results.append(item_info)
+            print(f"Complete {len(results)} / {len(item_ids)} - {q_type.name} - {query}")
     return results
 
 
@@ -272,7 +277,7 @@ async def track_info(track_id, client_id):
     if generals_data:
         generals_data['reposters'] = await get_id_from_collection(reposters_url, client_id, 100)
         generals_data['likers'] = await get_id_from_collection(likers_url, client_id, 100)
-        generals_data['comments'] =await get_id_from_collection(comments_url, client_id, 100, 'user')
+        generals_data['comments'] = await get_id_from_collection(comments_url, client_id, 100, 'user')
         generals_data['related_tracks'] = await get_id_from_collection(related_tracks_url, client_id, 100)
         generals_data['album'] = await get_id_from_collection(album_url, client_id, 100)
         generals_data['playlists'] = await get_id_from_collection(playlists_url, client_id, 100)
@@ -305,9 +310,9 @@ async def user_info(user_id, client_id):
         generals_data['user_tracks'] = await get_id_from_collection(user_tracks_url, client_id, 100)
         generals_data['user_top_tracks'] = await get_id_from_collection(user_top_tracks_url, client_id, 100)
         generals_data['user_albums'] = await get_id_from_collection(user_albums_url, client_id, 100)
-        generals_data['user_playlist_without_albums'] =await get_id_from_collection(user_playlist_without_albums_url,
-                                                                               client_id,
-                                                                               100)
+        generals_data['user_playlist_without_albums'] = await get_id_from_collection(user_playlist_without_albums_url,
+                                                                                     client_id,
+                                                                                     100)
         generals_data['related_artist'] = await get_id_from_collection(related_artist_url, client_id, 100)
         generals_data['followings'] = await get_id_from_collection(followings_url, client_id, 100)
         generals_data['followers'] = await get_id_from_collection(followers_url, client_id, 100)
@@ -331,5 +336,22 @@ async def user_info(user_id, client_id):
 
 async def main():
     client_id = 'qgbUmYdRbdAL2R1aLbVCgwzC7mvh8VKv'
-    discover_results, featured_results, charts_results = await asyncio.gather(get_discover(client_id), get_featured_tracks(client_id), get_charts(client_id))
+
+    keyword_list = ['hello', 'hi', 'sup']
+    query_tasks = []
+    for keyword in keyword_list:
+        tasks = asyncio.gather(
+            get_query_item(QueryType.PLAYLISTS, keyword, client_id, 1000),
+            get_query_item(QueryType.USERS, keyword, client_id, 1000),
+            get_query_item(QueryType.TRACKS, keyword, client_id, 1000),
+        )
+        query_tasks.append(tasks)
+    query_tasks = asyncio.gather(*query_tasks)
+    general_tasks = asyncio.gather(
+        get_charts(client_id),
+        get_discover(client_id),
+        get_featured_tracks(client_id)
+    )
+    results = await asyncio.gather(general_tasks, query_tasks)
+
 asyncio.run(main())
