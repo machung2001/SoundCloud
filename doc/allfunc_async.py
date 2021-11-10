@@ -133,7 +133,7 @@ async def playlist_info(playlist_id, client_id):
     return generals_data
 
 
-async def get_featured_tracks(client_id, result_limit=50):
+async def get_featured(client_id, result_limit=50):
     print("get_featured_ran")
     results = []
     url = f'https://api-v2.soundcloud.com/featured_tracks/top/all-music?linked_partitioning=1&client_id={client_id}&limit=100'
@@ -341,6 +341,36 @@ async def user_info(user_id, client_id):
     return generals_data
 
 
+def extract_data(results):
+    tracks = []
+    playlists = []
+    users = []
+
+    generals_data = results[0]
+    query_data = results[1]
+
+    for charts_track in generals_data[0]:
+        tracks.append(charts_track)
+    for discover_track in generals_data[1][0]:
+        tracks.append(discover_track)
+    for discover_playlist in generals_data[1][1]:
+        playlists.append(discover_playlist)
+    for featured_track in generals_data[2]:
+        tracks.append(featured_track)
+
+    for query_results in query_data:
+        for query_playlist in query_results[0]:
+            playlists.append(query_playlist)
+        for query_user in query_results[1]:
+            users.append(query_user)
+        for query_track in query_results[2]:
+            tracks.append(query_track)
+    tracks = list({track['id']: track for track in tracks}.values())
+    playlists = list({playlist['id']: playlist for playlist in playlists}.values())
+    users = list({user['id']: user for user in users}.values())
+    return tracks, playlists, users
+
+
 async def main():
     client_id = 'qgbUmYdRbdAL2R1aLbVCgwzC7mvh8VKv'
 
@@ -357,10 +387,13 @@ async def main():
     general_tasks = asyncio.gather(
         get_charts(client_id),
         get_discover(client_id),
-        get_featured_tracks(client_id)
+        get_featured(client_id)
     )
     results = await asyncio.gather(general_tasks, query_tasks)
-    temp_save(results, 'data.json')
+    tracks, playlists, users = extract_data(results)
+    temp_save(tracks, 'tracks.json')
+    temp_save(playlists, 'playlists.json')
+    temp_save(users, 'users.json')
 
 
 asyncio.get_event_loop().run_until_complete(main())
