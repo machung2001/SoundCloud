@@ -9,7 +9,7 @@ import aiohttp
 TOTAL_REQ = 0
 
 
-def savefile(file_name, json_data):
+def save_file(file_name, json_data):
     keys = set()
     for d in json_data:
         keys.update(d.keys())
@@ -402,13 +402,13 @@ async def main():
     results = await asyncio.gather(general_tasks, query_tasks)
     tracks, playlists, users = extract_data(results)
 
-    # temp_save(tracks, 'tracks.json')
-    # temp_save(playlists, 'playlists.json')
-    # temp_save(users, 'users.json')
+    temp_save(tracks, 'tracks.json')
+    temp_save(playlists, 'playlists.json')
+    temp_save(users, 'users.json')
 
-    savefile('tracks_file.csv', tracks)
-    savefile('playlists_file.csv', playlists)
-    savefile('users_file.csv', users)
+    save_file('tracks_file.csv', tracks)
+    save_file('playlists_file.csv', playlists)
+    save_file('users_file.csv', users)
 
 
 # asyncio.get_event_loop().run_until_complete(main())
