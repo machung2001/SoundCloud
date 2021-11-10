@@ -5,16 +5,16 @@ import csv
 import aiohttp
 
 #####################
-# testing variable, print this to see how many requests ha been made
+# testing variable, print this to see how many requests has been made
 TOTAL_REQ = 0
 
 
-def savefile(file_name, json_data):
+def save_file(file_name, json_data):
     keys = set()
     for d in json_data:
         keys.update(d.keys())
     keys = sorted(keys)
-    with open(file_name, 'a', encoding='utf-8') as output_file:
+    with open(file_name, 'w', encoding='utf-8') as output_file:
         dict_writer = csv.DictWriter(output_file, restval="-", fieldnames=keys, delimiter='\t')
         dict_writer.writeheader()
         dict_writer.writerows(json_data)
@@ -24,6 +24,11 @@ def savefile(file_name, json_data):
 def temp_save(json_data, file):
     with open(file, 'w') as f:
         json.dump(json_data, f, indent=4)
+
+
+async def join_list(l):
+    values = ','.join([str(i) for i in l])
+    return values
 
 
 #########################################
@@ -42,7 +47,7 @@ async def request_url(url, max_req=10):
                     else:
                         print(f'Aborted url: {response.url}')
                         return {}
-                # print(f"Hit {response.url}")
+                #print(f"Hit {response.url}")
                 # Testing variable
                 TOTAL_REQ += 1
                 return await response.json()
@@ -101,7 +106,7 @@ async def get_query_item(q_type, query, client_id, result_limit):
     if sub_url:
         item_ids.extend(await get_id_from_collection(sub_url, client_id, result_limit))
     # TODO:
-    item_ids = item_ids[:3]
+    # item_ids = item_ids[:1]
     print(f"Found {len(item_ids)} items for type {q_type.name} with {query} keyword")
     for item_id in item_ids:
         item_info = await func(item_id, client_id)
@@ -128,8 +133,9 @@ async def playlist_info(playlist_id, client_id):
     likers_url = f'https://api-v2.soundcloud.com/playlists/{playlist_id}/likers?client_id={client_id}&limit=100&linked_partitioning=1'
     generals_data = await extract_playlist_generals(playlist_id, client_id)
     if generals_data:
-        generals_data['reposters'] = await get_id_from_collection(reposters_url, client_id, 100)
-        generals_data['likers'] = await get_id_from_collection(likers_url, client_id, 100)
+        generals_data['reposters'] = await join_list(await get_id_from_collection(reposters_url, client_id, 100))
+        generals_data['likers'] = await join_list(await get_id_from_collection(likers_url, client_id, 100))
+        generals_data['tracks'] = await join_list(generals_data['tracks'])
     return generals_data
 
 
@@ -139,7 +145,7 @@ async def get_featured(client_id, result_limit=50):
     url = f'https://api-v2.soundcloud.com/featured_tracks/top/all-music?linked_partitioning=1&client_id={client_id}&limit=100'
     featured_tracks = await get_id_from_collection(url, client_id, result_limit)
     # TODO:
-    featured_tracks = featured_tracks[:2]
+    # featured_tracks = featured_tracks[:1]
     print(f"Found {len(featured_tracks)} featured tracks")
     for track in featured_tracks:
         ti = await track_info(track, client_id)
@@ -210,7 +216,7 @@ async def get_charts(client_id):
             charts_tracks.extend(await extract_charts_data(url, client_id))
     charts_tracks = list(set(charts_tracks))
     # TODO:
-    charts_tracks = charts_tracks[:2]
+    # charts_tracks = charts_tracks[:1]
     print(f"Found {len(charts_tracks)} charts tracks")
     for track in charts_tracks:
         ti = await track_info(track, client_id)
@@ -245,8 +251,8 @@ async def get_discover(client_id):
     print("get_discover_ran")
     tracks, playlists = await get_discover_id(client_id)
     # TODO:
-    playlists = playlists[:2]
-    tracks = tracks[:2]
+    # playlists = playlists[:1]
+    # tracks = tracks[:1]
     print(f"Found {len(tracks)} discover tracks")
     print(f"Found {len(playlists)} discover playlist")
 
@@ -283,12 +289,13 @@ async def track_info(track_id, client_id):
 
     generals_data = await extract_track_generals(track_id, client_id)
     if generals_data:
-        generals_data['reposters'] = await get_id_from_collection(reposters_url, client_id, 100)
-        generals_data['likers'] = await get_id_from_collection(likers_url, client_id, 100)
-        generals_data['comments'] = await get_id_from_collection(comments_url, client_id, 100, 'user')
-        generals_data['related_tracks'] = await get_id_from_collection(related_tracks_url, client_id, 100)
-        generals_data['album'] = await get_id_from_collection(album_url, client_id, 100)
-        generals_data['playlists'] = await get_id_from_collection(playlists_url, client_id, 100)
+        generals_data['reposters'] = await join_list(await get_id_from_collection(reposters_url, client_id, 100))
+        generals_data['likers'] = await join_list(await get_id_from_collection(likers_url, client_id, 100))
+        generals_data['comments'] = await join_list(await get_id_from_collection(comments_url, client_id, 100, 'user'))
+        generals_data['related_tracks'] = await join_list(
+            await get_id_from_collection(related_tracks_url, client_id, 100))
+        generals_data['album'] = await join_list(await get_id_from_collection(album_url, client_id, 100))
+        generals_data['playlists'] = await join_list(await get_id_from_collection(playlists_url, client_id, 100))
 
         generals_data.pop('publisher_metadata')
         generals_data.pop('media')
@@ -313,18 +320,21 @@ async def user_info(user_id, client_id):
     generals_data = await request_url(general_url)
     if generals_data:
         generals_data['web_profile'] = await request_url(web_profile_url)
-        generals_data['spotlight_tracks'] = await get_id_from_collection(spotlight_url, client_id, 100)
-        generals_data['user_tracks'] = await get_id_from_collection(user_tracks_url, client_id, 100)
-        generals_data['user_top_tracks'] = await get_id_from_collection(user_top_tracks_url, client_id, 100)
-        generals_data['user_albums'] = await get_id_from_collection(user_albums_url, client_id, 100)
-        generals_data['user_playlist_without_albums'] = await get_id_from_collection(user_playlist_without_albums_url,
-                                                                                     client_id,
-                                                                                     100)
-        generals_data['related_artist'] = await get_id_from_collection(related_artist_url, client_id, 100)
-        generals_data['followings'] = await get_id_from_collection(followings_url, client_id, 100)
-        generals_data['followers'] = await get_id_from_collection(followers_url, client_id, 100)
-        generals_data['reposts'] = await get_id_from_collection(reposts_url, client_id, 100, 'track')
-        generals_data['likes'] = await get_id_from_collection(likes_url, client_id, 100, 'track')
+        generals_data['spotlight_tracks'] = await join_list(await get_id_from_collection(spotlight_url, client_id, 100))
+        generals_data['user_tracks'] = await join_list(await get_id_from_collection(user_tracks_url, client_id, 100))
+        generals_data['user_top_tracks'] = await join_list(
+            await get_id_from_collection(user_top_tracks_url, client_id, 100))
+        generals_data['user_albums'] = await join_list(await get_id_from_collection(user_albums_url, client_id, 100))
+        generals_data['user_playlist_without_albums'] = await join_list(
+            await get_id_from_collection(user_playlist_without_albums_url,
+                                         client_id,
+                                         100))
+        generals_data['related_artist'] = await join_list(
+            await get_id_from_collection(related_artist_url, client_id, 100))
+        generals_data['followings'] = await join_list(await get_id_from_collection(followings_url, client_id, 100))
+        generals_data['followers'] = await join_list(await get_id_from_collection(followers_url, client_id, 100))
+        generals_data['reposts'] = await join_list(await get_id_from_collection(reposts_url, client_id, 100, 'track'))
+        generals_data['likes'] = await join_list(await get_id_from_collection(likes_url, client_id, 100, 'track'))
 
         generals_data.pop('creator_subscription')
         generals_data.pop('creator_subscriptions')
@@ -336,7 +346,7 @@ async def user_info(user_id, client_id):
         if web_profile:
             for social in web_profile:
                 socials.append(social['url'])
-        generals_data['socials'] = socials
+        generals_data['socials'] = ','.join(socials)
 
     return generals_data
 
@@ -374,7 +384,7 @@ def extract_data(results):
 async def main():
     client_id = 'qgbUmYdRbdAL2R1aLbVCgwzC7mvh8VKv'
 
-    keyword_list = ['hello', 'hi', 'sup', 'imagine dragon']
+    keyword_list = ['adele', 'justin', 'adam', 'imagine dragon']
     query_tasks = []
     for keyword in keyword_list:
         tasks = asyncio.gather(
@@ -391,9 +401,16 @@ async def main():
     )
     results = await asyncio.gather(general_tasks, query_tasks)
     tracks, playlists, users = extract_data(results)
+
     temp_save(tracks, 'tracks.json')
     temp_save(playlists, 'playlists.json')
     temp_save(users, 'users.json')
 
+    save_file('tracks_file.csv', tracks)
+    save_file('playlists_file.csv', playlists)
+    save_file('users_file.csv', users)
 
-asyncio.get_event_loop().run_until_complete(main())
+
+# asyncio.get_event_loop().run_until_complete(main())
+# await main()
+asyncio.run(main())
