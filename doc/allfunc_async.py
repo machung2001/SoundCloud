@@ -3,6 +3,7 @@ from enum import Enum
 import asyncio
 import csv
 import aiohttp
+from datetime import datetime
 
 #####################
 # testing variable, print this to see how many requests has been made
@@ -36,21 +37,25 @@ async def join_list(l):
 async def request_url(url, max_req=10):
     global TOTAL_REQ
     req = 0
-    async with aiohttp.ClientSession() as session:
-        while True:
-            async with session.get(url) as response:
-                if not response.ok:
-                    print(f"Failed {response.url}")
-                    req += 1
-                    if req < max_req:
-                        continue
-                    else:
-                        print(f'Aborted url: {response.url}')
-                        return {}
-                #print(f"Hit {response.url}")
-                # Testing variable
-                TOTAL_REQ += 1
-                return await response.json()
+    try:
+        async with aiohttp.ClientSession() as session:
+            while True:
+                async with session.get(url) as response:
+                    if response.status != 200:
+                        print(f"Failed {response.url}")
+                        req += 1
+                        if req < max_req:
+                            continue
+                        else:
+                            print(f'Aborted url: {response.url}')
+                            return {}
+                    # print(f"Hit {response.url}")
+                    # Testing variable
+                    TOTAL_REQ += 1
+                    return await response.json()
+    except Exception as e:
+        print(e)
+        return await request_url(url, max_req)
 
 
 class QueryType(Enum):
@@ -86,7 +91,7 @@ async def get_id_from_collection(url, client_id, result_limit, option=None):
 
 
 async def get_query_item(q_type, query, client_id, result_limit):
-    print(f"getting '{q_type.name}' query for {query} keywords")
+    print(f"Getting results of type {q_type.name} with query: '{query}'")
     results = []
     sub_url = ''
     if q_type == QueryType.USERS:
@@ -112,7 +117,7 @@ async def get_query_item(q_type, query, client_id, result_limit):
         item_info = await func(item_id, client_id)
         if item_info:
             results.append(item_info)
-            print(f"Complete {len(results)} / {len(item_ids)} - {q_type.name} - {query}")
+            print(f"Completed {len(results)} / {len(item_ids)} - {q_type.name} - {query}")
     return results
 
 
@@ -140,7 +145,7 @@ async def playlist_info(playlist_id, client_id):
 
 
 async def get_featured(client_id, result_limit=50):
-    print("get_featured_ran")
+    print("Getting SoundCloud's featured items...")
     results = []
     url = f'https://api-v2.soundcloud.com/featured_tracks/top/all-music?linked_partitioning=1&client_id={client_id}&limit=100'
     featured_tracks = await get_id_from_collection(url, client_id, result_limit)
@@ -151,7 +156,7 @@ async def get_featured(client_id, result_limit=50):
         ti = await track_info(track, client_id)
         if ti:
             results.append(ti)
-            print(f"Complete {len(results)} / {len(featured_tracks)} featured tracks")
+            print(f"Completed {len(results)} / {len(featured_tracks)} featured tracks")
     return results
 
 
@@ -161,7 +166,7 @@ async def extract_charts_data(url, client_id):
 
 
 async def get_charts(client_id):
-    print("get_charts_ran")
+    print("Getting SoundCloud's charts items...")
     kind_options = ['trending', 'top']
     genre_options = [
         'soundcloud:genres:all-music',
@@ -222,7 +227,7 @@ async def get_charts(client_id):
         ti = await track_info(track, client_id)
         if ti:
             results.append(ti)
-            print(f"Complete {len(results)} / {len(charts_tracks)} charts tracks")
+            print(f"Completed {len(results)} / {len(charts_tracks)} charts tracks")
     return results
 
 
@@ -248,7 +253,7 @@ async def get_discover_id(client_id):
 
 
 async def get_discover(client_id):
-    print("get_discover_ran")
+    print("Getting SoundCloud's discover items...")
     tracks, playlists = await get_discover_id(client_id)
     # TODO:
     # playlists = playlists[:1]
@@ -262,12 +267,12 @@ async def get_discover(client_id):
         ti = await track_info(track_id, client_id)
         if ti:
             track_result.append(ti)
-            print(f"Complete {len(track_result)} / {len(tracks)} discover tracks")
+            print(f"Completed {len(track_result)} / {len(tracks)} discover tracks")
     for playlist_id in playlists:
         pi = await playlist_info(playlist_id, client_id)
         if pi:
             playlist_result.append(pi)
-            print(f"Complete {len(playlist_result)} / {len(playlists)} discover playlists ")
+            print(f"Completed {len(playlist_result)} / {len(playlists)} discover playlists ")
     return track_result, playlist_result
 
 
@@ -399,16 +404,32 @@ async def main():
         get_discover(client_id),
         get_featured(client_id)
     )
+    start_time = datetime.now()
     results = await asyncio.gather(general_tasks, query_tasks)
     tracks, playlists, users = extract_data(results)
-
-    temp_save(tracks, 'tracks.json')
-    temp_save(playlists, 'playlists.json')
-    temp_save(users, 'users.json')
+    end_time = datetime.now()
+    total = end_time - start_time
+    total_seconds = int(total.total_seconds())
+    hours, remainder = divmod(total_seconds, 60 * 60)
+    minutes, seconds = divmod(remainder, 60)
+    print('##############################')
+    print("DATA CRAWLING COMPLETED")
+    print('##############################')
+    print('total time: {} hrs {} mins {} secs'.format(hours, minutes, seconds))
+    print('result: ')
+    print(f'\tTracks: {len(tracks)} items')
+    print(f'\tPlaylists: {len(playlists)} items')
+    print(f'\tUsers: {len(users)} items')
+    print('##############################')
+    print("saving data...")
+    # temp_save(tracks, 'tracks.json')
+    # temp_save(playlists, 'playlists.json')
+    # temp_save(users, 'users.json')
 
     save_file('tracks_file.csv', tracks)
     save_file('playlists_file.csv', playlists)
     save_file('users_file.csv', users)
+    print("DONE")
 
 
 # asyncio.get_event_loop().run_until_complete(main())
