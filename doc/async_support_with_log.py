@@ -44,14 +44,14 @@ async def request_url(url, max_req=10):
             while True:
                 async with session.get(url) as response:
                     if response.status != 200:
-                        rootLogger.debug(f"Failed {response.url}")
+                        rootLogger.debug(f"FAILED {response.url}")
                         req += 1
                         if req < max_req:
                             continue
                         else:
-                            rootLogger.info(f'Aborted url: {response.url}')
+                            rootLogger.info(f'ABORTED url: {response.url}')
                             return {}
-                    rootLogger.debug(f"Hit {response.url}")
+                    rootLogger.debug(f"HIT {response.url}")
                     return await response.json()
     except Exception as e:
         rootLogger.error(f'{e}')
@@ -349,8 +349,8 @@ async def get_discover_playlists(playlists, client_id, playlist_results):
 async def get_discover(client_id):
     tracks, playlists = await get_discover_id(client_id)
     # TODO:
-    playlists = playlists[:10]
-    tracks = tracks[:10]
+    # playlists = playlists[:10]
+    # tracks = tracks[:10]
     rootLogger.info(f"FOUND {len(tracks)} discover tracks")
     rootLogger.info(f"FOUND {len(playlists)} discover playlist")
 
