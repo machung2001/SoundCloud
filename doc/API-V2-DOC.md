@@ -362,7 +362,7 @@ This section requires the user's id for each specific user.
 ##### User's Generals
 To get general information about a specific user:
 ```
-GET 'https://api-v2.soundcloud.com/users/{USER_ID}?client_id={CLIENT_ID}&limit=20&linked_partitioning=1'
+GET 'https://api-v2.soundcloud.com/users/{USER_ID}?client_id={CLIENT_ID}&limit={RESULT_LIMIT}&linked_partitioning=1'
 ```
 With `USER_ID` is the id of a user. For example, a full URL would be:
 ```
@@ -381,11 +381,11 @@ GET 'https://api-v2.soundcloud.com/users/soundcloud:users:{USER_ID}/web-profiles
 ```
 ##### Splotlight
 ```
-GET 'https://api-v2.soundcloud.com/users/{USER_ID}/spotlight?client_id={CLIENT_ID}&limit=20&linked_partitioning=1'
+GET 'https://api-v2.soundcloud.com/users/{USER_ID}/spotlight?client_id={CLIENT_ID}&limit={RESULT_LIMIT}&linked_partitioning=1'
 ```
 ##### User's Tracks
 ```
-GET 'https://api-v2.soundcloud.com/users/{USER_ID}/tracks?client_id={CLIENT_ID}&limit=20&linked_partitioning=1'
+GET 'https://api-v2.soundcloud.com/users/{USER_ID}/tracks?client_id={CLIENT_ID}&limit={RESULT_LIMIT}&linked_partitioning=1'
 ```
 ##### User's Top tracks
 ```
@@ -393,31 +393,31 @@ GET 'https://api-v2.soundcloud.com/users/{USER_ID}/toptracks?client_id={CLIENT_I
 ```
 ##### User's Albums
 ```
-GET 'https://api-v2.soundcloud.com/users/{USER_ID}/albums?client_id={CLIENT_ID}&limit=10&linked_partitioning=1'
+GET 'https://api-v2.soundcloud.com/users/{USER_ID}/albums?client_id={CLIENT_ID}&limit={RESULT_LIMIT}&linked_partitioning=1'
 ```
 ##### User's Playlist without albums
 ```
-GET 'https://api-v2.soundcloud.com/users/{USER_ID}/playlists_without_albums?client_id={CLIENT_ID}&limit=10&linked_partitioning=1'
+GET 'https://api-v2.soundcloud.com/users/{USER_ID}/playlists_without_albums?client_id={CLIENT_ID}&limit={RESULT_LIMIT}&linked_partitioning=1'
 ```
 ##### Related Artist
 ```
-GET 'https://api-v2.soundcloud.com/users/{USER_ID}/relatedartists?client_id={CLIENT_ID}&limit=12&linked_partitioning=1'
+GET 'https://api-v2.soundcloud.com/users/{USER_ID}/relatedartists?client_id={CLIENT_ID}&limit={RESULT_LIMIT}&linked_partitioning=1'
 ```
 ##### Reposts
 ```
-GET 'https://api-v2.soundcloud.com/stream/users/{USER_ID}/reposts?client_id={CLIENT_ID}&limit=10&linked_partitioning=1'
+GET 'https://api-v2.soundcloud.com/stream/users/{USER_ID}/reposts?client_id={CLIENT_ID}&limit={RESULT_LIMIT}&linked_partitioning=1'
 ```
 ##### Likes
 ```
-GET 'https://api-v2.soundcloud.com/users/{USER_ID}/likes?client_id={CLIENT_ID}&limit=24&linked_partitioning=1'
+GET 'https://api-v2.soundcloud.com/users/{USER_ID}/likes?client_id={CLIENT_ID}&limit={RESULT_LIMIT}&linked_partitioning=1'
 ```
 ##### Following
 ```
-GET 'https://api-v2.soundcloud.com/users/{USER_ID}/followings?client_id={CLIENT_ID}&limit=3&linked_partitioning=1'
+GET 'https://api-v2.soundcloud.com/users/{USER_ID}/followings?client_id={CLIENT_ID}&limit={RESULT_LIMIT}&linked_partitioning=1'
 ```
 ##### Followers
 ```
-GET 'https://api-v2.soundcloud.com/users/{USER_ID}/followers?client_id={CLIENT_ID}&limit=12&linked_partitioning=1'
+GET 'https://api-v2.soundcloud.com/users/{USER_ID}/followers?client_id={CLIENT_ID}&limit={RESULT_LIMIT}&linked_partitioning=1'
 ```
 
 #### Playlists
@@ -427,15 +427,15 @@ Both playlists and albums ids can be used here.
 ##### Playlist's generals
 To get general information about a playlist:
 ```
-GET 'https://api-v2.soundcloud.com/playlists/{PLAYLIST_ID}?client_id={CLIENT_ID}&limit=9&linked_partitioning=1'
+GET 'https://api-v2.soundcloud.com/playlists/{PLAYLIST_ID}?client_id={CLIENT_ID}&limit={RESULT_LIMIT}&linked_partitioning=1'
 ```
 ##### Playlist reposters
 ```
-GET 'https://api-v2.soundcloud.com/playlists/{PLAYLIST_ID}/reposters?client_id={CLIENT_ID}&limit=9&linked_partitioning=1'
+GET 'https://api-v2.soundcloud.com/playlists/{PLAYLIST_ID}/reposters?client_id={CLIENT_ID}&limit={RESULT_LIMIT}&linked_partitioning=1'
 ```
 ##### Playlist likers
 ```
-GET 'https://api-v2.soundcloud.com/playlists/{PLAYLIST_ID}}/likers?client_id={CLIENT_ID}&limit=9&linked_partitioning=1'
+GET 'https://api-v2.soundcloud.com/playlists/{PLAYLIST_ID}}/likers?client_id={CLIENT_ID}&limit={RESULT_LIMIT}&linked_partitioning=1'
 ```
 #### Tracks
 ##### Track's generals 
@@ -446,27 +446,27 @@ https://api-v2.soundcloud.com/tracks/{TRACK_ID}?client_id={CLIENT_ID}&linked_par
 
 ##### Related tracks
 ```
-https://api-v2.soundcloud.com/tracks/{TRACK_ID}/related?client_id={CLIENT_ID}&limit=10&linked_partitioning=1
+https://api-v2.soundcloud.com/tracks/{TRACK_ID}/related?client_id={CLIENT_ID}&limit={RESULT_LIMIT}&linked_partitioning=1
 ```
 ##### In albums
 ```
-https://api-v2.soundcloud.com/tracks/{TRACK_ID}/albums?&client_id={CLIENT_ID}&limit=1&linked_partitioning=1
+https://api-v2.soundcloud.com/tracks/{TRACK_ID}/albums?&client_id={CLIENT_ID}&limit={RESULT_LIMIT}&linked_partitioning=1
 ```
 ##### In playlist
 ```
-https://api-v2.soundcloud.com/tracks/{TRACK_ID}/playlists_without_albums?client_id={CLIENT_ID}&limit=10&linked_partitioning=1
+https://api-v2.soundcloud.com/tracks/{TRACK_ID}/playlists_without_albums?client_id={CLIENT_ID}&limit={RESULT_LIMIT}&linked_partitioning=1
 ```
 ##### Reposters
 ```
-https://api-v2.soundcloud.com/tracks/{TRACK_ID}/reposters?client_id={CLIENT_ID}&limit=9&linked_partitioning=1
+https://api-v2.soundcloud.com/tracks/{TRACK_ID}/reposters?client_id={CLIENT_ID}&limit={RESULT_LIMIT}&linked_partitioning=1
 ```
 ##### Likers
 ```
-https://api-v2.soundcloud.com/tracks/{TRACK_ID}/likers?client_id={CLIENT_ID}&limit=9&linked_partitioning=1
+https://api-v2.soundcloud.com/tracks/{TRACK_ID}/likers?client_id={CLIENT_ID}&limit={RESULT_LIMIT}&linked_partitioning=1
 ```
 ##### Track's comments
 ```
-https://api-v2.soundcloud.com/tracks/{TRACK_ID}/comments?threaded=0&filter_replies=0&client_id={CLIENT_ID}&limit=20&linked_partitioning=1
+https://api-v2.soundcloud.com/tracks/{TRACK_ID}/comments?threaded=0&filter_replies=0&client_id={CLIENT_ID}&limit={RESULT_LIMIT}&linked_partitioning=1
 ```
 ### Generals
 
@@ -474,7 +474,7 @@ https://api-v2.soundcloud.com/tracks/{TRACK_ID}/comments?threaded=0&filter_repli
 
 When accessing [SoundCloud](https://soundcloud.com/), there's usually a list of tracks below the search bar. To get the tracks in this list, you can use:
 ```
-GET 'https://api-v2.soundcloud.com/featured_tracks/top/all-music?linked_partitioning=1&client_id={CLIENT_ID}&limit=20'
+GET 'https://api-v2.soundcloud.com/featured_tracks/top/all-music?linked_partitioning=1&client_id={CLIENT_ID}&limit={RESULT_LIMIT}'
 ```
 This will return a JSON containing a `collection` list that holds all the tracks. There will also be a `next_href` to navigate:
 ```JSON
